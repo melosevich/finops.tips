@@ -2,7 +2,6 @@
 // Assets
 import Logo from "@/components/assets/Logo.astro";
 // fundations
-import Button from "@/components/fundations/elements/Button.astro";
 import Wrapper from "@/components/fundations/containers/Wrapper.astro";
 // Components
 import JobSearch from "@/components/global/Search.astro";
@@ -10,10 +9,6 @@ import MobileNav from "@/components/global/MobileNav.astro";
 const navLinks = [
   { href: "/", label: "Home" },
   { href: "/blog", label: "Blog" },
-  { href: "/helpcenter", label: "Help Center" },
-  { href: "/pricing", label: "Pricing" },
-  { href: "/sign-in", label: "Sign In" },
-  { href: "/system/overview", label: "Overview" },
   { href: "/about", label: "About" },
 ];
 ---
@@ -32,10 +27,6 @@ const navLinks = [
       </div>
       <div class="items-center gap-2 flex ml-auto">
         <JobSearch />
-       <div class="hidden items-center gap-2 lg:flex">
-          <Button isLink href="/sign-in" size="sm" variant="muted">Sign in</Button>
-          <Button isLink href="/sign-up"size="sm" variant="accent" >Sign in</Button>
-      </div>
       <button
         id="navToggle"
         class="hover:text-primary/40 duration-300 text-primary text-sm lg:hidden"

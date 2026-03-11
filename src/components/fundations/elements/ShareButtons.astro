@@ -10,9 +10,7 @@ const { url, title, description, contentType = "blog" } = Astro.props;
 ---
 
 <div class="flex items-center gap-2">
-  <button id="twitter-share" aria-label="Share on Twitter" class="text-primary font-mono text-xs font-medium uppercase duration-300 hover:underline"> Twitter </button>
   <button id="facebook-share" aria-label="Share on Facebook" class="text-primary font-mono text-xs font-medium uppercase duration-300 hover:underline"> Facebook </button>
-  <button id="linkedin-share" aria-label="Share on LinkedIn" class="text-primary font-mono text-xs font-medium uppercase duration-300 hover:underline"> Linkedin </button>
   <button id="copy-link" aria-label="Copy link" class="text-primary font-mono text-xs font-medium uppercase duration-300 hover:underline"> Website </button>
 </div>
 <script define:vars={{ url, title, description, contentType }}>
@@ -26,20 +24,10 @@ const { url, title, description, contentType = "blog" } = Astro.props;
   if (pageDesc) {
     shareText += ` - ${pageDesc}`;
   }
-  // Twitter share
-  document.getElementById("twitter-share")?.addEventListener("click", () => {
-    const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(pageUrl)}`;
-    window.open(twitterUrl, "_blank");
-  });
   // Facebook share
   document.getElementById("facebook-share")?.addEventListener("click", () => {
     const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(pageUrl)}`;
     window.open(facebookUrl, "_blank");
-  });
-  // LinkedIn share
-  document.getElementById("linkedin-share")?.addEventListener("click", () => {
-    const linkedinUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(pageUrl)}`;
-    window.open(linkedinUrl, "_blank");
   });
   // Copy link
   document.getElementById("copy-link")?.addEventListener("click", () => {
