@@ -1,80 +1,70 @@
 ---
-page: Privacy Policy
-pubDate: 2026-04-01
+page: Privacy Notice
+pubDate: 2026-03-11
 ---
 
+This is a hobby, community-driven website curated by FinOps practitioners. We are not a company and we do not sell personal data.
 
-At [Your Company Name] ("we", "our", or "us"), we respect your privacy and are committed to protecting your personal data. This Privacy Policy explains how we collect, use, and safeguard your personal information when you use our job board website ("Website").
+The site is a static website that primarily publishes informational content. We aim to keep data collection to the minimum needed to run the site.
 
-By accessing or using the Website, you agree to the collection and use of your personal information as described in this Privacy Policy.
+## 1. Who we are
 
-## 1. Information We Collect
+**finops.tips** is maintained by FinOps practitioners as a community project.
 
-We may collect the following types of information when you use our Website:
+## 2. What personal data we collect
 
-- **Personal Information**: This includes information you provide when creating an account, submitting a job listing, or applying for a job. It may include your name, email address, company name, job title, phone number, location, and other relevant details.
-- **Job Application Information**: When you apply for a job, we may collect the information you provide in your application, such as your resume, cover letter, and other personal details.
-- **Usage Data**: We collect information about how you interact with our Website, including the pages you visit, the links you click, and other actions you take on the Website.
-- **Cookies**: We may use cookies and similar technologies to enhance your experience on our Website. These technologies help us remember your preferences, improve site functionality, and analyze Website traffic.
+### a) Newsletter subscriptions (Mailchimp)
 
-## 2. How We Use Your Information
+If you subscribe to our newsletter, we collect:
 
-We use the information we collect for the following purposes:
+- your **email address** (required)
 
-- To provide and manage the services on the Website, including posting and applying for jobs.
-- To communicate with you about job listings, applications, and account updates.
-- To improve our Website and services based on your feedback and usage data.
-- To respond to your inquiries and provide customer support.
-- To comply with legal obligations and protect our rights.
+This data is processed by **Mailchimp** (a third‑party email service provider) for the purpose of sending you updates.
 
-## 3. Sharing Your Information
+### b) Server logs
 
-We do not share, sell, or rent your personal information to third parties, except in the following cases:
+Like most websites, our hosting provider may process basic technical data in server logs (e.g., IP address, user agent, timestamps) for security and operational purposes.
 
-- **With your consent**: We may share your information if you explicitly consent to it.
-- **Service Providers**: We may share information with third-party service providers who help us operate the Website, such as hosting providers, analytics services, or email providers. These third parties are obligated to keep your information secure and use it only for the purposes we specify.
-- **Legal Compliance**: We may disclose your information to comply with legal requirements, such as a court order, or to protect our rights or the rights of others.
+## 3. Cookies and tracking
 
-## 4. Data Retention
+We do **not** use tracking cookies or analytics cookies on finops.tips.
 
-We retain your personal information for as long as necessary to provide you with the services on the Website, to comply with legal obligations, and to resolve disputes. If you delete your account or stop using our Website, we may retain some information for a limited period to meet our legal obligations or enforce our agreements.
+Because we do not store cookies for tracking purposes, there is **no cookie banner**.
 
-## 5. Your Rights
+(Your browser or third‑party services you use may still store their own cookies; this is outside our control.)
 
-Depending on your jurisdiction, you may have the right to:
+## 4. How we use your data
 
-- Access, correct, or delete your personal information.
-- Object to or restrict the processing of your personal information.
-- Withdraw your consent to our use of your personal information (if applicable).
+We use personal data only to:
 
-To exercise any of these rights, please contact us using the information provided below.
+- send the newsletter to subscribers
+- keep the website secure and operational
 
-## 6. Security
+## 5. Sharing
 
-We take reasonable measures to protect your personal information from unauthorized access, disclosure, or alteration. However, no method of transmission over the Internet or electronic storage is 100% secure, and we cannot guarantee the security of your data.
+We do not sell or rent personal data.
 
-## 7. Children's Privacy
+We may share data only with service providers that help us deliver the website/newsletter (e.g., Mailchimp, hosting), and only for those purposes.
 
-Our Website is not intended for children under the age of 13. We do not knowingly collect personal information from children. If we become aware that a child has provided us with personal information, we will take steps to delete that information.
+## 6. Retention
 
-## 8. International Data Transfers
+- Newsletter subscription data is retained until you **unsubscribe** (or it is deleted by the provider according to their retention policies).
 
-If you are located outside of [Your Country], please be aware that your personal information may be transferred to and stored on servers located in [Your Country] or other countries with different data protection laws. By using our Website, you consent to such transfers.
+## 7. Your rights
 
-## 9. Changes to This Privacy Policy
+Depending on your jurisdiction (including the EU/EEA), you may have rights to access, correct, delete, or restrict processing of your personal data.
 
-We may update this Privacy Policy from time to time. Any changes will be posted on this page with the updated date. Your continued use of the Website after any changes constitutes your acceptance of the updated Privacy Policy.
+If you subscribed via Mailchimp, you can **unsubscribe at any time** using the unsubscribe link in the email.
 
-## 10. Contact Us
+## 8. Changes
 
-If you have any questions or concerns about this Privacy Policy or our practices regarding your personal information, please contact us at:
+We may update this notice from time to time. The latest version will always be published on this page.
 
-**TechWorks Solutions**  
-Email: [support@example.com](mailto:support@example.com)  
-Phone: +1 (123) 456-7890  
-Address: 123 Ingithubtion Avenue, Suite 456, San Francisco, CA 94105, USA
+## 9. Contact
 
+For privacy questions or requests, contact:
 
-Thank you for using our Job Board!
+**Gonzalo Melosevich**
 
----
+Please contact via LinkedIn:
+- <https://www.linkedin.com/in/melosevich/>
