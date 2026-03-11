@@ -5,11 +5,8 @@ import Text from "@/components/fundations/elements/Text.astro";
 import Wrapper from "@/components/fundations/containers/Wrapper.astro";
 // Sections
 import Hero from "@/components/landing/Hero.astro";
-import Hiring from "@/components/landing/Hiring.astro";
-import Companies from "@/components/landing/Companies.astro";
-import Categories from "@/components/landing/Categories.astro";
-import Candidates from "@/components/landing/Candidates.astro";
-import FeaturedJobs from "@/components/landing/FeaturedJobs.astro";
+import TipColumn from "@/components/landing/TipColumn.astro";
+import Events from "@/components/landing/Events.astro";
 ---
 
 <BaseLayout>
@@ -17,13 +14,10 @@ import FeaturedJobs from "@/components/landing/FeaturedJobs.astro";
     <Wrapper variant="standard" class="py-24">
       <Hero />
       <div class="mt-12 grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-4">
-        <FeaturedJobs />
-        <Categories />
-        <div class="space-y-12">
-          <Hiring />
-          <Companies />
-        </div>
-        <Candidates />
+        <TipColumn title="Operations" tag="operations" />
+        <TipColumn title="Services" tag="services" />
+        <Events />
+        <TipColumn title="Metrics" tag="metrics" />
       </div>
     </Wrapper>
   </section>

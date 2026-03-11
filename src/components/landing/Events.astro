@@ -1,0 +1,18 @@
+---
+import Text from "@/components/fundations/elements/Text.astro";
+import EventEntry from "@/components/events/EventEntry.astro";
+import { getCollection } from "astro:content";
+
+const allPosts = await getCollection("posts");
+const events = allPosts
+  .filter((p) => p.data.tags?.includes("events"))
+  .sort((a, b) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime())
+  .slice(0, 3);
+---
+
+<div>
+  <Text tag="h2" variant="textBase" class="font-medium text-primary">Events</Text>
+  <div class="flex flex-col mt-1 divide-y divide-primary/10 border-y border-primary/10">
+    {events.map((post) => <EventEntry post={post} />)}
+  </div>
+</div>
