@@ -1,6 +1,6 @@
 ---
 page: Privacy Notice
-pubDate: 2026-03-11
+pubDate: 2025-02-01
 ---
 
 This is a hobby, community-driven website curated by FinOps practitioners. We are not a company and we do not sell personal data.
@@ -21,9 +21,11 @@ If you subscribe to our newsletter, we collect:
 
 This data is processed by **Mailchimp** (a third‑party email service provider) for the purpose of sending you updates.
 
-### b) Server logs
+### b) Hosting / access logs
 
-Like most websites, our hosting provider may process basic technical data in server logs (e.g., IP address, user agent, timestamps) for security and operational purposes.
+finops.tips is hosted on **GitHub Pages**. We do not run our own servers.
+
+GitHub may process technical access data (e.g., IP address, user agent, timestamps) as part of providing the hosting service.
 
 ## 3. Cookies and tracking
 
