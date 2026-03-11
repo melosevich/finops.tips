@@ -1,13 +1,17 @@
+---
+const title = Astro.props.title ?? "FinOps Tips";
+const description =
+  Astro.props.description ??
+  "Daily, bite-sized FinOps wisdom: operations, services, and metrics — with practical examples.";
+const author = Astro.props.author ?? "FinOps Tips";
+---
+
 <!-- Meta Tags -->
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Your Website Title</title>
-<meta
-  name="description"
-  content="A brief description of your website content."
-/>
-<meta name="keywords" content="keyword1, keyword2, keyword3" />
-<meta name="author" content="Your Name or Company Name" />
+<title>{title}</title>
+<meta name="description" content={description} />
+<meta name="author" content={author} />
 
 <!-- Theme Color for Mobile Browsers -->
 <meta name="theme-color" content="#ffffff" />

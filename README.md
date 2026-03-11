@@ -1,4 +1,4 @@
-# Carriera
+# FinOps Tips
 
 ![Theme preview](https://lexingtonthemes.com/OpenGraph/carriera/twitter.png)
 
