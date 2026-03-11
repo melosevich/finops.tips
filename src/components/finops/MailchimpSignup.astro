@@ -1,0 +1,78 @@
+---
+// Minimal Mailchimp signup form (no external CSS/JS).
+// Posts to Mailchimp in a hidden iframe so the user stays on the same page.
+// We can’t reliably detect success (cross-origin), so we show a friendly message
+// telling them to check their inbox.
+
+const {
+  action =
+    "https://tips.us9.list-manage.com/subscribe/post?u=8845686e07410de30f3eb851b&id=46a7f39ff4&f_id=0070c2e1f0",
+  buttonText = "Get daily tips",
+  placeholder = "you@company.com",
+} = Astro.props;
+
+const honeypotName = "b_8845686e07410de30f3eb851b_46a7f39ff4";
+const formId = "mc-signup-form";
+const iframeName = "mc-hidden-iframe";
+---
+
+<div class="mt-6 max-w-xl">
+  <form
+    id={formId}
+    class="flex flex-col gap-3 sm:flex-row sm:items-center"
+    action={action}
+    method="post"
+    target={iframeName}
+    novalidate
+  >
+    <label class="sr-only" for="mc-email">Email</label>
+    <input
+      id="mc-email"
+      name="EMAIL"
+      type="email"
+      required
+      inputmode="email"
+      autocomplete="email"
+      placeholder={placeholder}
+      class="w-full rounded-lg border border-primary/20 bg-background px-4 py-3 text-sm text-primary placeholder:text-primary/40 focus:outline-none focus:ring-2 focus:ring-blue/60"
+    />
+
+    {/* Bot trap (Mailchimp recommended). Keep it off-screen. */}
+    <div aria-hidden="true" class="absolute left-[-5000px]">
+      <input type="text" name={honeypotName} tabindex="-1" value="" />
+    </div>
+
+    <button
+      type="submit"
+      class="inline-flex items-center justify-center rounded-lg bg-blue px-5 py-3 text-sm font-medium text-white hover:opacity-95 transition"
+    >
+      {buttonText}
+    </button>
+  </form>
+
+  <p class="mt-2 text-xs text-primary/60">
+    No spam. Unsubscribe anytime.
+  </p>
+
+  <p
+    id="mc-thanks"
+    class="mt-3 hidden rounded-lg bg-primary/5 px-4 py-3 text-sm text-primary/80"
+  >
+    Thanks — check your inbox to confirm your subscription.
+  </p>
+
+  <iframe name={iframeName} class="hidden" title="Mailchimp hidden iframe"></iframe>
+</div>
+
+<script>
+  (function () {
+    const form = document.getElementById("mc-signup-form");
+    const thanks = document.getElementById("mc-thanks");
+    if (!form || !thanks) return;
+
+    form.addEventListener("submit", () => {
+      // Keep user on the same page and show a friendly message.
+      thanks.classList.remove("hidden");
+    });
+  })();
+</script>
