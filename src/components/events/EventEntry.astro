@@ -1,0 +1,35 @@
+---
+import { Image } from "astro:assets";
+import Text from "@/components/fundations/elements/Text.astro";
+
+const post = Astro.props.post;
+
+const url = `/archive/posts/${post.slug}`;
+const title = post.data.title;
+const description = post.data.description;
+const image = post.data.image?.url;
+const alt = post.data.image?.alt ?? title;
+const date = new Date(post.data.pubDate).toLocaleDateString("en-US", {
+  year: "numeric",
+  month: "short",
+  day: "2-digit",
+});
+---
+
+<article class="relative py-4">
+  <a href={url} class="absolute inset-0 z-10" aria-label={title}></a>
+  <div class="flex items-center gap-2">
+    {image && (
+      <Image width={48} height={48} src={image} alt={alt} class="size-10 rounded-full object-cover" />
+    )}
+
+    <div>
+      <Text tag="h4" variant="textBase" class="text-primary font-medium">
+        {title}
+      </Text>
+      <Text tag="p" variant="textSM" class="text-primary/60">
+        {date} <span aria-hidden="true">/</span> {description}
+      </Text>
+    </div>
+  </div>
+</article>

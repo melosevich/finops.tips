@@ -33,9 +33,9 @@ const tags = [...new Set(allPosts.map((post) => post.data.tags).flat())];
             ).length;
             return (
               <li class="relative flex items-baseline justify-between">
-                <a href={`/blog/tags/${tag}`} class="absolute inset-0 z-10" />
+                <a href={`/archive/tags/${tag}`} class="absolute inset-0 z-10" />
                 <Text
-                  href={`/blog/tags/${tag}`}
+                  href={`/archive/tags/${tag}`}
                   variant="textSM"
                   class="text-primary font-medium capitalize"
                 >
