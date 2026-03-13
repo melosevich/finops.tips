@@ -2,9 +2,28 @@
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import Text from "@/components/fundations/elements/Text.astro";
 import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+import { getCollection } from "astro:content";
 
-const { frontmatter } = Astro.props;
+const { frontmatter, slug } = Astro.props;
 const published = new Date(frontmatter.pubDate);
+
+const currentTags: string[] = frontmatter.tags ?? [];
+const isEvent = slug?.match(/^\d{4}-\d{2}-\d{2}-events-/);
+
+let relatedTips: { slug: string; title: string; description: string }[] = [];
+if (!isEvent && currentTags.length > 0) {
+  const allPosts = await getCollection("posts");
+  relatedTips = allPosts
+    .filter(
+      (p) =>
+        p.slug !== slug &&
+        !p.slug.match(/^\d{4}-\d{2}-\d{2}-events-/) &&
+        p.data.tags?.some((t) => currentTags.includes(t))
+    )
+    .sort((a, b) => a.slug.localeCompare(b.slug))
+    .slice(0, 5)
+    .map((p) => ({ slug: p.slug, title: p.data.title, description: p.data.description }));
+}
 ---
 
 <BaseLayout>
@@ -53,6 +72,21 @@ const published = new Date(frontmatter.pubDate);
       <Wrapper variant="prose" class="mt-6">
         <slot />
       </Wrapper>
+
+      {relatedTips.length > 0 && (
+        <div class="mt-16 border-t border-primary/10 pt-12">
+          <Text tag="h2" variant="textBase" class="font-medium text-primary">Related Tips</Text>
+          <div class="mt-4 flex flex-col divide-y divide-primary/10 border-y border-primary/10">
+            {relatedTips.map((tip) => (
+              <div class="relative py-4">
+                <a href={`/archive/posts/${tip.slug}`} class="absolute inset-0 z-10" title={tip.title}></a>
+                <Text tag="h3" variant="textBase" class="text-primary font-medium capitalize">{tip.title}</Text>
+                <Text tag="p" variant="textSM" class="text-primary/60">{tip.description}</Text>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </Wrapper>
   </section>
 </BaseLayout>

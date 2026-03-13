@@ -26,5 +26,12 @@
     "listUrl": "https://aws.amazon.com/events/summits/?ams%23interactive-card-vertical%23pattern-data-1911509906.filters=((id:GLOBAL%23location-geographic-regions-emea.and,value:(europe)))",
     "hostTag": "aws",
     "logo": "/src/images/events/official/aws.png"
+  },
+  {
+    "id": "gcp-events",
+    "name": "Google Cloud Events",
+    "listUrl": "https://cloudonair.withgoogle.com/events",
+    "hostTag": "google",
+    "logo": "/src/images/events/official/gcp.svg"
   }
 ]

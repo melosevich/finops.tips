@@ -11,14 +11,17 @@ const [posts, legal, team] =
   ]);
 
 const items = [
-  ...posts.map(({ slug, data }) => ({
-    title: data.title,
-    subtitle: data.team ?? "",
-    description: data.description,
-    meta: "",
-    url: `/archive/posts/${slug}`,
-    type: "Blog",
-  })),
+  ...posts
+    // Exclude auto-generated event pages from search results
+    .filter((p) => !p.slug.match(/^\d{4}-\d{2}-\d{2}-events-/))
+    .map(({ slug, data }) => ({
+      title: data.title,
+      subtitle: data.team ?? (data.tags?.join(", ") ?? ""),
+      description: data.description,
+      meta: "",
+      url: `/archive/posts/${slug}`,
+      type: "Tip",
+    })),
   ...legal.map(({ slug, data }) => ({
     title: data.page,
     subtitle: "",

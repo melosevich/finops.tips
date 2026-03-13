@@ -3,12 +3,23 @@ import Text from "@/components/fundations/elements/Text.astro";
 import BlogEntry from "@/components/blog/BlogEntries.astro";
 import { getCollection } from "astro:content";
 
-const { title, tag, limit = 3 } = Astro.props;
+const { title, tag, limit = 10 } = Astro.props;
 
 const allPosts = await getCollection("posts");
+
+// Home tips ordering policy (Operations/Services/Metrics):
+// - filter by section tag
+// - order: most recent → oldest (pubDate desc)
+// - deterministic tie-break: slug asc
+// Rationale: at higher limits we want "quality-first" lists that stay fresh (recency)
+// while never reordering arbitrarily between builds (deterministic tie-break).
 const posts = allPosts
   .filter((p) => (tag ? p.data.tags?.includes(tag) : true))
-  .sort((a, b) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime())
+  .sort((a, b) => {
+    const byDate = b.data.pubDate.getTime() - a.data.pubDate.getTime();
+    if (byDate !== 0) return byDate;
+    return a.slug.localeCompare(b.slug);
+  })
   .slice(0, limit);
 ---
 
