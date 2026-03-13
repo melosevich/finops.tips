@@ -4,9 +4,16 @@ import EventEntry from "@/components/events/EventEntry.astro";
 import { getCollection } from "astro:content";
 
 const allPosts = await getCollection("posts");
+const today = new Date();
+// normalize to local date (Copenhagen-ish) by stripping time
+const startOfToday = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+
 const events = allPosts
   .filter((p) => p.data.tags?.includes("events"))
-  .sort((a, b) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime())
+  // Home shows upcoming events only
+  .filter((p) => new Date(p.data.pubDate) >= startOfToday)
+  // Sort soonest first
+  .sort((a, b) => new Date(a.data.pubDate).getTime() - new Date(b.data.pubDate).getTime())
   .slice(0, 10);
 ---
 
