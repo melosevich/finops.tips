@@ -3,12 +3,13 @@ import Text from "@/components/fundations/elements/Text.astro";
 import BlogEntry from "@/components/blog/BlogEntries.astro";
 import { getCollection } from "astro:content";
 
-const { title, tag } = Astro.props;
+const { title, tag, limit = 10 } = Astro.props;
 
 const allPosts = await getCollection("posts");
 const posts = allPosts
   .filter((p) => (tag ? p.data.tags?.includes(tag) : true))
-  .sort((a, b) => a.slug.localeCompare(b.slug));
+  .sort((a, b) => a.slug.localeCompare(b.slug))
+  .slice(0, limit);
 ---
 
 <div>

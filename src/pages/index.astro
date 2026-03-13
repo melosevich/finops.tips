@@ -7,6 +7,8 @@ import Wrapper from "@/components/fundations/containers/Wrapper.astro";
 import Hero from "@/components/landing/Hero.astro";
 import TipColumn from "@/components/landing/TipColumn.astro";
 import Events from "@/components/landing/Events.astro";
+
+const HOME_TIPS_LIMIT = 10;
 ---
 
 <BaseLayout>
@@ -14,9 +16,9 @@ import Events from "@/components/landing/Events.astro";
     <Wrapper variant="standard" class="py-24">
       <Hero />
       <div class="mt-12 grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-4">
-        <TipColumn title="Operations" tag="operations" />
-        <TipColumn title="Services" tag="services" />
-        <TipColumn title="Metrics" tag="metrics" />
+        <TipColumn title="Operations" tag="operations" limit={HOME_TIPS_LIMIT} />
+        <TipColumn title="Services" tag="services" limit={HOME_TIPS_LIMIT} />
+        <TipColumn title="Metrics" tag="metrics" limit={HOME_TIPS_LIMIT} />
         <Events />
       </div>
     </Wrapper>
