@@ -4,7 +4,7 @@ team: "gonzalo-melosevich"
 title: "SAP Sapphire EMEA"
 description: "Premier gathering for business leaders, innovators, and partners to explore how SAP Business AI, cloud innovations, and platform-led transformation are reshaping end-to-end supply chain operatio"
 image:
-  url: "/src/images/events/microsoft.svg"
+  url: "/src/images/events/official/microsoft.png"
   alt: "Microsoft Events"
 tags:
   - events

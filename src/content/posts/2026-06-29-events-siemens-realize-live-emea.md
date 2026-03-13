@@ -4,7 +4,7 @@ team: "gonzalo-melosevich"
 title: "Siemens Realize Live EMEA"
 description: "Join expert-led session featuring real-world insights from customers and industry leaders. Learn how the integrated digital thread, industrial AI-powered digital twin, and cloud-native agility a"
 image:
-  url: "/src/images/events/microsoft.svg"
+  url: "/src/images/events/official/microsoft.png"
   alt: "Microsoft Events"
 tags:
   - events

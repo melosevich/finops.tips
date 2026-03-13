@@ -4,7 +4,7 @@ team: "gonzalo-melosevich"
 title: "Agentic DevOps Day"
 description: "N/A"
 image:
-  url: "/src/images/events/microsoft.svg"
+  url: "/src/images/events/official/microsoft.png"
   alt: "Microsoft Events"
 tags:
   - events

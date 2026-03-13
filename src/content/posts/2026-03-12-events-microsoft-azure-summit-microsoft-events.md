@@ -4,7 +4,7 @@ team: "gonzalo-melosevich"
 title: "Microsoft Azure Summit | Microsoft Events"
 description: "Join Microsoft Azure events to migrate and modernize with Agentic AI and advance your journey to becoming an AI-first Frontier Firm."
 image:
-  url: "/src/images/events/microsoft.svg"
+  url: "/src/images/events/official/microsoft.png"
   alt: "Microsoft Events"
 tags:
   - events

@@ -4,7 +4,7 @@ team: "gonzalo-melosevich"
 title: "Agentic AI & DevOps Day"
 description: "Join Agentic AI & DevOps Days – a hands-on roadshow for Builders & Innovators. Explore agentic AI, DevOps automation, Azure AI with live demos, use cases & labs."
 image:
-  url: "/src/images/events/microsoft.svg"
+  url: "/src/images/events/official/microsoft.png"
   alt: "Microsoft Events"
 tags:
   - events

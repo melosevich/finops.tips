@@ -4,7 +4,7 @@ team: "gonzalo-melosevich"
 title: "KubeCon Europe​​"
 description: "The Cloud Native Computing Foundation’s flagship conference brings together adopters and technologists from leading open source and cloud native communities."
 image:
-  url: "/src/images/events/microsoft.svg"
+  url: "/src/images/events/official/microsoft.png"
   alt: "Microsoft Events"
 tags:
   - events

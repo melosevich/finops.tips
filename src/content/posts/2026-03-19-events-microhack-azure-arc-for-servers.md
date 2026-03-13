@@ -4,7 +4,7 @@ team: "gonzalo-melosevich"
 title: "MicroHack Azure Arc for Servers"
 description: "MicroHack Azure Arc for Servers"
 image:
-  url: "/src/images/events/microsoft.svg"
+  url: "/src/images/events/official/microsoft.png"
   alt: "Microsoft Events"
 tags:
   - events

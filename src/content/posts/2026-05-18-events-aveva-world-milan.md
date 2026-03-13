@@ -4,7 +4,7 @@ team: "gonzalo-melosevich"
 title: "AVEVA World Milan"
 description: "Whether you focus on designing industrial facilities for greater sustainability, or need to enable faster, more informed operational decisions, it’s a new era of industry, brimming with possibil"
 image:
-  url: "/src/images/events/microsoft.svg"
+  url: "/src/images/events/official/microsoft.png"
   alt: "Microsoft Events"
 tags:
   - events

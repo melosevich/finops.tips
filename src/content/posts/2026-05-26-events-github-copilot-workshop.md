@@ -4,7 +4,7 @@ team: "gonzalo-melosevich"
 title: "Github Copilot Workshop"
 description: "See how GitHub Copilot accelerates engineering workflows and improves developer experience. Target audience: Developers & Head of Development roles"
 image:
-  url: "/src/images/events/microsoft.svg"
+  url: "/src/images/events/official/microsoft.png"
   alt: "Microsoft Events"
 tags:
   - events

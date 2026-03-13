@@ -4,7 +4,7 @@ team: "gonzalo-melosevich"
 title: "From Code to Impact: GitHub Copilot for AI Builders"
 description: "From Code to Impact: GitHub Copilot for AI Builders"
 image:
-  url: "/src/images/events/microsoft.svg"
+  url: "/src/images/events/official/microsoft.png"
   alt: "Microsoft Events"
 tags:
   - events

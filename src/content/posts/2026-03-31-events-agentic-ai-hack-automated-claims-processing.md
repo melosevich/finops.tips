@@ -4,7 +4,7 @@ team: "gonzalo-melosevich"
 title: "Agentic AI Hack: Automated Claims Processing"
 description: "Join us for a practical, hands‑on hackathon focused on agentic AI for claims processing and document automation"
 image:
-  url: "/src/images/events/microsoft.svg"
+  url: "/src/images/events/official/microsoft.png"
   alt: "Microsoft Events"
 tags:
   - events

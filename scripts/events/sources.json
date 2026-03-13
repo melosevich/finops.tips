@@ -4,27 +4,27 @@
     "name": "FinOps Foundation",
     "listUrl": "https://www.finops.org/community/events/",
     "hostTag": "finopsfoundation",
-    "logo": "/src/images/events/finopsfoundation.svg"
+    "logo": "/src/images/events/official/finopsfoundation.png"
   },
   {
     "id": "finopsdk",
     "name": "FinOpsDK",
     "listUrl": "https://finopsdk.org/events",
     "hostTag": "finopsdk",
-    "logo": "/src/images/events/finopsdk.svg"
+    "logo": "/src/images/events/official/finopsdk.svg"
   },
   {
     "id": "microsoft-events",
     "name": "Microsoft Events",
     "listUrl": "https://www.microsoft.com/en-us/events/search-catalog?filters=primary-language%3Aenglish%2Cformat%3Ain-person%2Ctopic%3Aai%2Ctopic%3Acloud-platform%2Ctopic%3Ainfrastructure%2Cregion%3Aeurope%2Cproduct%3Aazure&scenario=events",
     "hostTag": "microsoft",
-    "logo": "/src/images/events/microsoft.svg"
+    "logo": "/src/images/events/official/microsoft.png"
   },
   {
     "id": "aws-summits",
     "name": "AWS Summits",
     "listUrl": "https://aws.amazon.com/events/summits/?ams%23interactive-card-vertical%23pattern-data-1911509906.filters=((id:GLOBAL%23location-geographic-regions-emea.and,value:(europe)))",
     "hostTag": "aws",
-    "logo": "/src/images/events/aws.svg"
+    "logo": "/src/images/events/official/aws.png"
   }
 ]

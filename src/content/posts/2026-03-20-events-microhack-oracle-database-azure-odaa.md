@@ -4,7 +4,7 @@ team: "gonzalo-melosevich"
 title: "MicroHack - Oracle Database@Azure (ODAA)"
 description: "MicroHack - Oracle Database@Azure (ODAA) - 20.03.26"
 image:
-  url: "/src/images/events/microsoft.svg"
+  url: "/src/images/events/official/microsoft.png"
   alt: "Microsoft Events"
 tags:
   - events

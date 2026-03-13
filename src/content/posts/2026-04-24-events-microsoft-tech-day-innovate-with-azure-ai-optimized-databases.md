@@ -4,7 +4,7 @@ team: "gonzalo-melosevich"
 title: "Microsoft Tech Day: Innovate with Azure AI-optimized Databases"
 description: "Microsoft Tech Day: Innovate with Azure AI-optimized Databases"
 image:
-  url: "/src/images/events/microsoft.svg"
+  url: "/src/images/events/official/microsoft.png"
   alt: "Microsoft Events"
 tags:
   - events

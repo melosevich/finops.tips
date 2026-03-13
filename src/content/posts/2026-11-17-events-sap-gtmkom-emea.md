@@ -4,7 +4,7 @@ team: "gonzalo-melosevich"
 title: "SAP GTMKOM- EMEA"
 description: "SAP GTMKOM- EMEA"
 image:
-  url: "/src/images/events/microsoft.svg"
+  url: "/src/images/events/official/microsoft.png"
   alt: "Microsoft Events"
 tags:
   - events

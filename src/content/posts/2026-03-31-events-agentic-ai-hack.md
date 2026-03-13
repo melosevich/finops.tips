@@ -4,7 +4,7 @@ team: "gonzalo-melosevich"
 title: "Agentic AI Hack"
 description: "Join us on March 31st at 10:00 AM for a Microsoft Agentic AI Hack - an exclusive, hands-on technical event for Builders & Innovators."
 image:
-  url: "/src/images/events/microsoft.svg"
+  url: "/src/images/events/official/microsoft.png"
   alt: "Microsoft Events"
 tags:
   - events
