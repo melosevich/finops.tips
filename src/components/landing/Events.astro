@@ -4,9 +4,24 @@ import EventEntry from "@/components/events/EventEntry.astro";
 import { getCollection } from "astro:content";
 
 const allPosts = await getCollection("posts");
+
+// Events policy:
+// - only upcoming (>= today)
+// - only within the next ~3 months (90 days)
+// - order: sooner → later
+// - max 10
+const today = new Date();
+const startOfToday = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+const maxDate = new Date(startOfToday);
+maxDate.setDate(maxDate.getDate() + 90);
+
 const events = allPosts
   .filter((p) => p.data.tags?.includes("events"))
-  .sort((a, b) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime())
+  .filter((p) => {
+    const d = new Date(p.data.pubDate);
+    return d >= startOfToday && d <= maxDate;
+  })
+  .sort((a, b) => new Date(a.data.pubDate).getTime() - new Date(b.data.pubDate).getTime())
   .slice(0, 10);
 ---
 
