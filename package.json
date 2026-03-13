@@ -8,7 +8,8 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "events:update": "node scripts/events/update-events.mjs"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.13",
@@ -20,6 +21,8 @@
     "@tailwindcss/vite": "^4.1.18",
     "astro": "^5.16.6",
     "tailwind-scrollbar-hide": "^4.0.0",
-    "tailwindcss": "^4.1.18"
+    "tailwindcss": "^4.1.18",
+    "cheerio": "^1.1.2",
+    "playwright": "^1.53.0"
   }
 }
