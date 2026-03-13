@@ -1,5 +1,4 @@
 ---
-import { Image } from "astro:assets";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import Text from "@/components/fundations/elements/Text.astro";
 import Wrapper from "@/components/fundations/containers/Wrapper.astro";
@@ -50,17 +49,6 @@ const published = new Date(frontmatter.pubDate);
         </Text>
       </div>
 
-      {frontmatter.image?.url && (
-        <div class="mt-10">
-          <Image
-            width={900}
-            height={450}
-            alt={frontmatter.image?.alt ?? frontmatter.title}
-            src={frontmatter.image.url}
-            class="w-full max-h-64 rounded object-cover object-center"
-          />
-        </div>
-      )}
 
       <Wrapper variant="prose" class="mt-6">
         <slot />
