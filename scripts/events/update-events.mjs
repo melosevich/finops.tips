@@ -22,6 +22,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import crypto from "node:crypto";
+import { decode } from "html-entities";
 
 import * as cheerio from "cheerio";
 
@@ -235,8 +236,8 @@ function normalizeEvent({ source, url, jsonld, html }) {
   const $ = cheerio.load(html);
   const og = extractOg($);
 
-  const title = (jsonld?.name || og.title || "").trim();
-  const description = (jsonld?.description || og.description || "").replace(/\s+/g, " ").trim();
+  const title = decode((jsonld?.name || og.title || "").trim());
+  const description = decode((jsonld?.description || og.description || "").replace(/\s+/g, " ").trim());
 
   let startDate = jsonld?.startDate ? new Date(jsonld.startDate) : null;
   let loc = parseLocation(jsonld?.location);
