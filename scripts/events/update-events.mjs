@@ -332,6 +332,215 @@ function listExistingEventPosts() {
   return fs.readdirSync(POSTS_DIR).filter((f) => f.includes("-events-"));
 }
 
+function asAbsUrl(maybeRelative, base) {
+  if (!maybeRelative) return null;
+  try {
+    return new URL(maybeRelative, base).toString();
+  } catch {
+    return null;
+  }
+}
+
+function safeJsonParse(s) {
+  try {
+    return JSON.parse(s);
+  } catch {
+    return null;
+  }
+}
+
+function normalizeAdapterEvent({ source, url, title, description, startDate, location }) {
+  // location: { online?, venue?, city?, country?, timezone? }
+  const loc = location || {};
+
+  const europeOk = isEuropeLocation(loc) && (!loc.online || Boolean(loc.timezone));
+  if (!title || !startDate || Number.isNaN(startDate.getTime()) || !europeOk) return null;
+
+  return {
+    sourceId: source.id,
+    sourceName: source.name,
+    hostTag: source.hostTag,
+    hostLogo: source.logo,
+    url,
+    title: (title || "").trim(),
+    description: (description || "").replace(/\s+/g, " ").trim() || `${source.name} event`,
+    startDate,
+    location: {
+      online: Boolean(loc.online),
+      venue: loc.venue,
+      city: loc.city,
+      country: loc.country,
+      timezone: loc.timezone,
+    },
+  };
+}
+
+async function crawlAwsSummits(source) {
+  // Uses AWS dirs API discovered from the Summits page.
+  // Returns events with additionalFields.date + additionalFields.location.
+  const api =
+    "https://aws.amazon.com/api/dirs/items/search" +
+    "?item.directoryId=events-cards-interactive-summits-cards-interactive-events-summits-hub-interactive-cards1" +
+    "&item.locale=en_US" +
+    "&tags.id=GLOBAL%23location-geographic-regions-emea%23europe" +
+    "&sort_by=item.additionalFields.publishedDate" +
+    "&sort_order=asc" +
+    "&size=50";
+
+  const jsonText = await fetchText(api);
+  const j = safeJsonParse(jsonText);
+  const items = j?.items || [];
+  console.log(`Candidates (API): ${items.length}`);
+
+  const out = [];
+  for (const it of items) {
+    const item = it.item || it;
+    const af = item.additionalFields || {};
+
+    const title = af.title || item.title || item.name;
+    const description = af.body;
+    const dateStr = af.date;
+    const venue = af.location;
+    const url = asAbsUrl(af.ctaLink || item.url, "https://aws.amazon.com");
+
+    if (!dateStr || !venue || !url) continue;
+    const startDate = new Date(dateStr);
+    // best-effort city/country parsing from venue string
+    // Try to derive city/country from venue string or URL slug
+    let city;
+    let country;
+
+    // patterns like "EXPO XXI in Warsaw, Poland" or "Warsaw, Poland"
+    const m1 = venue.match(/\b([A-Z][A-Za-z\- ]+),\s*([A-Z][A-Za-z ]+)\b/);
+    if (m1) {
+      city = m1[1].trim();
+      country = m1[2].trim();
+    }
+    const m2 = venue.match(/\bin\s+([A-Z][A-Za-z\- ]+),\s*([A-Z][A-Za-z ]+)\b/);
+    if (!country && m2) {
+      city = m2[1].trim();
+      country = m2[2].trim();
+    }
+
+    // If still missing, infer from ctaLink path segment
+    if (!country) {
+      const slug = (af.ctaLink || "").split("/").filter(Boolean).pop();
+      const map = {
+        paris: { city: "Paris", country: "France" },
+        london: { city: "London", country: "United Kingdom" },
+        warsaw: { city: "Warsaw", country: "Poland" },
+        stockholm: { city: "Stockholm", country: "Sweden" },
+        hamburg: { city: "Hamburg", country: "Germany" },
+        amsterdam: { city: "Amsterdam", country: "Netherlands" },
+        milan: { city: "Milan", country: "Italy" },
+        madrid: { city: "Madrid", country: "Spain" },
+      };
+      if (slug && map[slug]) {
+        city = map[slug].city;
+        country = map[slug].country;
+      }
+    }
+
+    const loc = { online: false, venue, city, country };
+    const normalized = normalizeAdapterEvent({
+      source,
+      url,
+      title,
+      description,
+      startDate,
+      location: loc,
+    });
+    if (normalized) out.push(normalized);
+  }
+
+  console.log(`Extracted valid events: ${out.length}`);
+  return out;
+}
+
+async function crawlMicrosoftEvents(source) {
+  // Uses Microsoft msonecloudapi backend discovered from the search catalog.
+  const endpoint = "https://www.microsoft.com/msonecloudapi/events/cards";
+
+  const filters =
+    "product:azure," +
+    "region:europe," +
+    "format:in-person," +
+    "topic:ai," +
+    "topic:cloud-platform," +
+    "topic:infrastructure," +
+    "primary-language:english";
+
+  let skip = 0;
+  const top = 50;
+  const out = [];
+
+  while (true) {
+    const body = {
+      locale: "en-ww",
+      top,
+      skip,
+      filters,
+      scenario: "events",
+    };
+
+    const res = await fetch(endpoint, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        accept: "application/json",
+        "user-agent": "finops.tips-events-bot/1.0 (+https://finops.tips)",
+      },
+      body: JSON.stringify(body),
+    });
+
+    if (!res.ok) break;
+
+    const j = await res.json();
+    const cards = j?.cards || [];
+    console.log(`Candidates (API page skip=${skip}): ${cards.length}`);
+
+    for (const c of cards) {
+      const content = c.content || c;
+      const title = content.title || content.name;
+      const description = content.description;
+      const startDateStr = content.eventDates?.startDate;
+      const locObj = content.location || {};
+      const url = content.action?.href;
+
+      if (!title || !startDateStr || !url) continue;
+      const startDate = new Date(startDateStr);
+
+      const loc = {
+        online: false,
+        venue: undefined,
+        city: locObj.city,
+        country: locObj.country,
+      };
+
+      const normalized = normalizeAdapterEvent({
+        source,
+        url,
+        title,
+        description,
+        startDate,
+        location: loc,
+      });
+      if (normalized) out.push(normalized);
+    }
+
+    if (!j?.hasMorePages) break;
+    skip += top;
+    if (skip > 500) break; // safety
+  }
+
+  // de-dupe by URL
+  const byUrl = new Map();
+  for (const ev of out) byUrl.set(ev.url, ev);
+  const deduped = [...byUrl.values()];
+  console.log(`Extracted valid events: ${deduped.length}`);
+  return deduped;
+}
+
 function extractCandidateLinks(listHtml, listUrl) {
   const $ = cheerio.load(listHtml);
   const anchors = $("a[href]").toArray();
@@ -355,7 +564,15 @@ function extractCandidateLinks(listHtml, listUrl) {
 async function crawlSource(source) {
   console.log(`\n== Source: ${source.name} ==`);
 
-  // Try plain fetch first, then fallback to rendered HTML.
+  // Source adapters (preferred): use official JSON APIs where available
+  if (source.id === "aws-summits") {
+    return await crawlAwsSummits(source);
+  }
+  if (source.id === "microsoft-events") {
+    return await crawlMicrosoftEvents(source);
+  }
+
+  // Default (scraping): Try plain fetch first, then fallback to rendered HTML.
   let listHtml = await fetchText(source.listUrl);
   let candidates = extractCandidateLinks(listHtml, source.listUrl);
 
