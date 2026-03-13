@@ -4,7 +4,7 @@ team: "gonzalo-melosevich"
 title: "Oracle AI World Tour - London"
 description: "Hear the latest breakthroughs in AI-powered cloud applications, databases, and infrastructure from experts, partners, Oracle executives, and local business leaders."
 image:
-  url: "/src/images/events/microsoft.svg"
+  url: "/src/images/events/official/microsoft.png"
   alt: "Microsoft Events"
 tags:
   - events

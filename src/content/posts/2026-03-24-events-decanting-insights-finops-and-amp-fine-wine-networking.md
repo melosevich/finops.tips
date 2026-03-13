@@ -4,7 +4,7 @@ team: "gonzalo-melosevich"
 title: "Decanting Insights: FinOps &amp; Fine Wine Networking"
 description: "FinOps Foundation event"
 image:
-  url: "/src/images/events/finopsfoundation.svg"
+  url: "/src/images/events/official/finopsfoundation.png"
   alt: "FinOps Foundation"
 tags:
   - events

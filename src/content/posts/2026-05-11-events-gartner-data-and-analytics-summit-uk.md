@@ -4,7 +4,7 @@ team: "gonzalo-melosevich"
 title: "Gartner Data & Analytics Summit UK​​"
 description: "Join the premier conference for CDAOs, heads of AI, and data and analytics leaders to uncover the latest in data management, data trends, AI, agentic AI, generative AI, governance and data arc​​"
 image:
-  url: "/src/images/events/microsoft.svg"
+  url: "/src/images/events/official/microsoft.png"
   alt: "Microsoft Events"
 tags:
   - events

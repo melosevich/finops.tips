@@ -4,7 +4,7 @@ team: "gonzalo-melosevich"
 title: "AWS Summit London 2026"
 description: "AWS Summit London 2026 is a free one-day event where the latest in cloud innovation comes to life. From agentic AI to serverless computing, discover..."
 image:
-  url: "/src/images/events/aws.svg"
+  url: "/src/images/events/official/aws.png"
   alt: "AWS Summits"
 tags:
   - events

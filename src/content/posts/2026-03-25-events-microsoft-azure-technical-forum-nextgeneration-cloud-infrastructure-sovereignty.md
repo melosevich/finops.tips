@@ -4,7 +4,7 @@ team: "gonzalo-melosevich"
 title: "Microsoft Azure Technical Forum -  NextGeneration Cloud Infrastructure: Sovereignty,..."
 description: "Microsoft Azure Technical Forum - NextGeneration Cloud Infrastructure: Sovereignty, Resilience, and Trusted Execution"
 image:
-  url: "/src/images/events/microsoft.svg"
+  url: "/src/images/events/official/microsoft.png"
   alt: "Microsoft Events"
 tags:
   - events

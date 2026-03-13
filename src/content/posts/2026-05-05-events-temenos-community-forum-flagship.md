@@ -4,7 +4,7 @@ team: "gonzalo-melosevich"
 title: "Temenos Community Forum (Flagship)"
 description: "Join industry leaders and visionaries for an unforgettable experience filled with forward-looking insights, emerging technologies, and high-impact networking."
 image:
-  url: "/src/images/events/microsoft.svg"
+  url: "/src/images/events/official/microsoft.png"
   alt: "Microsoft Events"
 tags:
   - events
