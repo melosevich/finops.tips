@@ -3,26 +3,14 @@
 import SearchIcon from "@/components/fundations/icons/Search.astro";
 import { getCollection } from "astro:content";
 
-const [jobs, posts, companies, candidates, helpcenter, legal, team] =
+const [posts, legal, team] =
   await Promise.all([
-    getCollection("jobs"),
     getCollection("posts"),
-    getCollection("companies"),
-    getCollection("candidates"),
-    getCollection("helpcenter"),
     getCollection("legal"),
     getCollection("team"),
   ]);
 
 const items = [
-  ...jobs.map(({ slug, data }) => ({
-    title: data.title,
-    subtitle: data.company,
-    description: data.type ?? data.category ?? "",
-    meta: [data.location, data.salary].filter(Boolean).join(" / "),
-    url: `/jobs/${slug}`,
-    type: "Job",
-  })),
   ...posts.map(({ slug, data }) => ({
     title: data.title,
     subtitle: data.team ?? "",
@@ -30,30 +18,6 @@ const items = [
     meta: "",
     url: `/archive/posts/${slug}`,
     type: "Blog",
-  })),
-  ...companies.map(({ slug, data }) => ({
-    title: data.name,
-    subtitle: data.industry ?? "",
-    description: data.description,
-    meta: data.location ?? "",
-    url: `/companies/${slug}`,
-    type: "Company",
-  })),
-  ...candidates.map(({ slug, data }) => ({
-    title: [data.firstName, data.lastName].filter(Boolean).join(" "),
-    subtitle: data.location ?? "",
-    description: data.jobPreferences?.join(", ") ?? "",
-    meta: data.experienceLevel ?? "",
-    url: `/candidates/${slug}`,
-    type: "Candidate",
-  })),
-  ...helpcenter.map(({ slug, data }) => ({
-    title: data.page,
-    subtitle: data.category,
-    description: data.description,
-    meta: "",
-    url: `/helpcenter/${slug}`,
-    type: "Help Center",
   })),
   ...legal.map(({ slug, data }) => ({
     title: data.page,
