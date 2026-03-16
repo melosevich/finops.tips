@@ -101,6 +101,19 @@ function listPosts() {
     .filter(Boolean);
 }
 
+function removeLegacyEventDailyTips() {
+  const files = fs
+    .readdirSync(POSTS_DIR)
+    .filter((name) => name.endsWith(".md"))
+    .filter((name) => name.includes("-events-daily-tip-"));
+
+  for (const file of files) {
+    fs.unlinkSync(path.join(POSTS_DIR, file));
+  }
+
+  return files;
+}
+
 function withinDays(date, now, days) {
   const delta = now.getTime() - date.getTime();
   return delta >= 0 && delta <= days * 24 * 3600 * 1000;
@@ -144,10 +157,37 @@ function summarizeReasonCounts(items, reasonKey = "reason") {
   return counts;
 }
 
+function removeSupersededGeneratedTips(validTips) {
+  const keepFileNames = new Set(validTips.map((tip) => makeTipFileName(tip)));
+  const keepKeys = new Set(validTips.map((tip) => `${tip.pubDate}:${tip.section}`));
+
+  const candidates = fs
+    .readdirSync(POSTS_DIR)
+    .filter((name) => name.endsWith(".md"))
+    .filter((name) => /^\d{4}-\d{2}-\d{2}-(operations|services|metrics)-daily-tip-/.test(name));
+
+  const removed = [];
+  for (const fileName of candidates) {
+    if (keepFileNames.has(fileName)) continue;
+    const match = fileName.match(/^(\d{4}-\d{2}-\d{2})-(operations|services|metrics)-daily-tip-/);
+    if (!match) continue;
+    const key = `${match[1]}:${match[2]}`;
+    if (!keepKeys.has(key)) continue;
+    fs.unlinkSync(path.join(POSTS_DIR, fileName));
+    removed.push(fileName);
+  }
+
+  return removed;
+}
+
 function main() {
   const now = new Date();
+  const startOfToday = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  const removedLegacyEventTips = removeLegacyEventDailyTips();
   const allPosts = listPosts();
-  const generatedHistory = allPosts.filter((post) => post.generated && withinDays(post.pubDate, now, 60));
+  const generatedHistory = allPosts.filter(
+    (post) => post.generated && post.pubDate < startOfToday && withinDays(post.pubDate, now, 60),
+  );
 
   const sourceUniverse = allPosts.filter((post) => {
     const section = SECTIONS.find((candidate) => post.tags.includes(candidate));
@@ -170,6 +210,8 @@ function main() {
     })),
     recentSourceSlugsBySection,
   });
+
+  const removedSupersededTips = removeSupersededGeneratedTips(valid);
 
   const writes = {
     created: 0,
@@ -194,6 +236,8 @@ function main() {
     generatedCount: valid.length,
     rejectedCount: rejected.length,
     duplicateCount: duplicates.length,
+    removedLegacyEventTips: removedLegacyEventTips.length,
+    removedSupersededTips: removedSupersededTips.length,
     rejectedReasons: summarizeReasonCounts(rejected),
     duplicateReasons: summarizeReasonCounts(duplicates),
     writes,
@@ -208,6 +252,8 @@ function main() {
   console.log(`- generated_count=${summary.generatedCount}`);
   console.log(`- rejected_count=${summary.rejectedCount}`);
   console.log(`- duplicate_count=${summary.duplicateCount}`);
+  console.log(`- removed_legacy_event_daily_tips=${summary.removedLegacyEventTips}`);
+  console.log(`- removed_superseded_tips=${summary.removedSupersededTips}`);
   console.log(`- writes_created=${summary.writes.created}`);
   console.log(`- writes_updated=${summary.writes.updated}`);
   console.log(`- writes_unchanged=${summary.writes.unchanged}`);

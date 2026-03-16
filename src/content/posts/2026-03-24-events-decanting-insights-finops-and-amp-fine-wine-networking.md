@@ -1,10 +1,10 @@
 ---
 pubDate: 2026-03-24
 team: "gonzalo-melosevich"
-title: "Decanting Insights: FinOps &amp; Fine Wine Networking"
+title: "Decanting Insights: FinOps & Fine Wine Networking"
 description: "FinOps Foundation event"
 image:
-  url: "/src/images/events/official/finopsfoundation.png"
+  url: "/src/images/events/official/finops-foundation.jpg"
   alt: "FinOps Foundation"
 tags:
   - events
