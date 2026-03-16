@@ -2,7 +2,7 @@
 pubDate: 2026-03-16
 team: "gonzalo-melosevich"
 title: "Optimize AWS Lambda usage before it scales your bill"
-description: "Translate AWS Lambda usage patterns into an immediate architecture or commitment decision."
+description: "Turn AWS Lambda usage shape into a concrete architecture plus commitment strategy with expected savings."
 image:
   url: "/src/images/blog/1.jpg"
   alt: "services daily tip"
@@ -13,15 +13,15 @@ tags:
 ---
 
 ## What It Is
-AWS Lambda is a major cloud service cost center where usage mode, commitment strategy, and architecture shape total spend.
+AWS Lambda spend is governed by three levers: utilization profile, pricing model (on-demand vs commitment), and architecture efficiency (duration, memory/compute, and data movement).
 
 ## Why It Matters
-Service spend compounds quickly as traffic grows. Early tuning prevents overpaying for idle capacity, inefficient request patterns, or wrong purchase models.
+If you tune only one lever, savings plateau quickly. Durable FinOps gains come from combining engineering changes with the right commercial commitment.
 
 ## How to Act
-1. Identify the top two SKUs driving this service cost.
-2. Compare current usage against commitment discounts and burst patterns.
-3. Open one architecture ticket to reduce the most expensive usage mode.
+1. Rank the top SKUs/usage types for this service and quantify each as % of monthly service spend.
+2. Segment workload into steady baseline vs burst usage; map baseline to RI/Savings Plan coverage target and leave burst on on-demand.
+3. Execute one engineering optimization with measured ROI (for example, reduce runtime or over-provisioning) and track realized savings against forecast.
 
 ## Example
-If AWS Lambda cost is 30% above plan, move bursty traffic to autoscaling and reserve the stable baseline. Source: [Service: AWS Lambda](https://finops.tips/archive/posts/204-services-lambda).
+If AWS Lambda is 30% above plan and 70% of usage is stable, target 60-70% commitment coverage for the stable slice and reduce peak-unit consumption by 10-15% via architecture tuning; validate savings in CUR within 7 days. Source: [Service: AWS Lambda](https://finops.tips/archive/posts/204-services-lambda).
