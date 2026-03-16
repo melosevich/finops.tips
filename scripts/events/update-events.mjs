@@ -55,6 +55,26 @@ function sha1(input) {
   return crypto.createHash("sha1").update(input).digest("hex").slice(0, 10);
 }
 
+function decodeHtmlEntities(input) {
+  if (!input) return "";
+
+  const named = {
+    amp: "&",
+    lt: "<",
+    gt: ">",
+    quot: "\"",
+    apos: "'",
+    nbsp: " ",
+  };
+
+  return String(input)
+    .replace(/&#(\d+);/g, (_, n) => String.fromCodePoint(Number.parseInt(n, 10)))
+    .replace(/&#x([0-9a-f]+);/gi, (_, n) => String.fromCodePoint(Number.parseInt(n, 16)))
+    .replace(/&([a-z]+);/gi, (m, name) => named[name.toLowerCase()] ?? m)
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
 async function fetchText(url) {
   const res = await fetch(url, {
     redirect: "follow",
@@ -215,8 +235,8 @@ function normalizeEvent({ source, url, jsonld, html }) {
   const $ = cheerio.load(html);
   const og = extractOg($);
 
-  const title = (jsonld?.name || og.title || "").trim();
-  const description = (jsonld?.description || og.description || "").replace(/\s+/g, " ").trim();
+  const title = decodeHtmlEntities(jsonld?.name || og.title || "");
+  const description = decodeHtmlEntities(jsonld?.description || og.description || "");
 
   let startDate = jsonld?.startDate ? new Date(jsonld.startDate) : null;
   let loc = parseLocation(jsonld?.location);
@@ -242,7 +262,7 @@ function normalizeEvent({ source, url, jsonld, html }) {
     hostLogo: source.logo,
     url,
     title,
-    description: description || `${source.name} event`,
+    description,
     startDate,
     location: {
       online: Boolean(loc.online),
@@ -335,8 +355,8 @@ function normalizeAdapterEvent({ source, sourceEventId, url, title, description,
     hostTag: source.hostTag,
     hostLogo: source.logo,
     url,
-    title: (title || "").trim(),
-    description: (description || "").replace(/\s+/g, " ").trim() || `${source.name} event`,
+    title: decodeHtmlEntities(title || ""),
+    description: decodeHtmlEntities(description || ""),
     startDate,
     location: {
       online: Boolean(loc.online),

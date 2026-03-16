@@ -1,6 +1,6 @@
 import crypto from "node:crypto";
 
-export const SECTIONS = ["operations", "services", "metrics", "events"];
+export const SECTIONS = ["operations", "services", "metrics"];
 
 const IMPERATIVE_HINTS = [
   "audit",
@@ -46,74 +46,65 @@ const CLOUD_KEYWORDS = [
 const SECTION_TEMPLATES = {
   operations: {
     prompt: "Generate one concrete cloud operations cost tip with an immediate runbook action.",
-    buildTitle: (source) => `Runbook focus: ${source.title}`,
-    buildSummary: (source) => `Use ${source.title} as today's operations checkpoint and remove request-level waste.` ,
+    buildTitle: (source) => `Understand ${source.focus} patterns to reduce request costs`,
+    buildSummary: (source) => `Use ${source.focus} telemetry to cut unnecessary requests before they compound into spend.`,
     buildBody: (source) =>
       [
-        "## Why this matters",
-        `Operational API churn in \`${source.title}\` often hides avoidable request spend and retry overhead.`,
+        "## What It Is",
+        `${source.focus} is an operations signal that points to request volume, retries, and transfer behavior affecting your cloud bill.`,
         "",
-        "## Action today",
-        "1. Pull 7 days of request-level cost grouped by workload and environment.",
-        "2. Flag low-value high-frequency calls and batch or cache them.",
-        "3. Add an alert when cost-per-request drifts 15% above baseline.",
+        "## Why It Matters",
+        "Request-heavy paths can drive large spend even when unit prices look small. Tightening API usage lowers both direct request and downstream processing costs.",
         "",
-        "## Source signal",
-        `[${source.title}](${source.url})`,
+        "## How to Act",
+        "1. Pull 7 days of request-level cost by workload and environment.",
+        "2. Flag low-value, high-frequency calls and reduce them with caching or batching.",
+        "3. Alert when cost-per-request rises more than 15% over baseline.",
+        "",
+        "## Example",
+        `If ${source.focus} requests grow 18% week-over-week without matching business growth, cap retries, tune cache TTL, and recheck spend after 48 hours. Source: [${source.title}](${source.url}).`,
       ].join("\n"),
   },
   services: {
     prompt: "Generate one service-level optimization tip with a direct procurement or architecture action.",
-    buildTitle: (source) => `Service optimization: ${source.title}`,
-    buildSummary: (source) => `Turn insights from ${source.title} into a concrete service cost decision this week.` ,
+    buildTitle: (source) => `Optimize ${source.focus} usage before it scales your bill`,
+    buildSummary: (source) => `Translate ${source.focus} usage patterns into an immediate architecture or commitment decision.`,
     buildBody: (source) =>
       [
-        "## Why this matters",
-        `Service-level pricing patterns in \`${source.title}\` compound quickly when workloads scale.`,
+        "## What It Is",
+        `${source.focus} is a major cloud service cost center where usage mode, commitment strategy, and architecture shape total spend.`,
         "",
-        "## Action today",
+        "## Why It Matters",
+        "Service spend compounds quickly as traffic grows. Early tuning prevents overpaying for idle capacity, inefficient request patterns, or wrong purchase models.",
+        "",
+        "## How to Act",
         "1. Identify the top two SKUs driving this service cost.",
         "2. Compare current usage against commitment discounts and burst patterns.",
         "3. Open one architecture ticket to reduce the most expensive usage mode.",
         "",
-        "## Source signal",
-        `[${source.title}](${source.url})`,
+        "## Example",
+        `If ${source.focus} cost is 30% above plan, move bursty traffic to autoscaling and reserve the stable baseline. Source: [${source.title}](${source.url}).`,
       ].join("\n"),
   },
   metrics: {
     prompt: "Generate one KPI-oriented FinOps tip with a measurable threshold and owner handoff.",
-    buildTitle: (source) => `Metric to watch: ${source.title}`,
-    buildSummary: (source) => `Use ${source.title} to set a threshold-driven metric review for this billing cycle.` ,
+    buildTitle: (source) => `Track ${source.focus} to catch cloud waste early`,
+    buildSummary: (source) => `Set clear thresholds for ${source.focus} so owners can act before month-end variance grows.`,
     buildBody: (source) =>
       [
-        "## Why this matters",
-        `Without metric guardrails, teams miss trend changes until monthly close. \`${source.title}\` is a strong leading signal.`,
+        "## What It Is",
+        `${source.focus} is a FinOps KPI that shows whether cost efficiency is improving or drifting.`,
         "",
-        "## Action today",
+        "## Why It Matters",
+        "Without threshold ownership, teams discover cost drift too late. Metric guardrails provide earlier, lower-cost correction points.",
+        "",
+        "## How to Act",
         "1. Set a target and an upper warning threshold for this metric.",
         "2. Split by team or product to isolate ownership quickly.",
         "3. Review weekly and attach action notes to every threshold breach.",
         "",
-        "## Source signal",
-        `[${source.title}](${source.url})`,
-      ].join("\n"),
-  },
-  events: {
-    prompt: "Generate one events section tip that ties an upcoming event to a concrete FinOps action.",
-    buildTitle: (source) => `Event prep: ${source.title}`,
-    buildSummary: (source) => `Use ${source.title} as a trigger to collect one concrete benchmark from peers or vendors.` ,
-    buildBody: (source) =>
-      [
-        "## Why this matters",
-        "Events are useful only when tied to a measurable follow-up in your cost program.",
-        "",
-        "## Action today",
-        "1. Define one FinOps question to validate at this event (pricing, commitments, or tooling).",
-        "2. Capture one benchmark from at least two practitioners.",
-        "3. Add a post-event action item with owner and due date.",
-        "",
-        "## Source signal",
-        `[${source.title}](${source.url})`,
+        "## Example",
+        `If ${source.focus} crosses its warning threshold for two weeks, require each owner to submit one remediation and expected savings. Source: [${source.title}](${source.url}).`,
       ].join("\n"),
   },
 };
@@ -130,10 +121,6 @@ const FALLBACK_SOURCE_BY_SECTION = {
   metrics: {
     title: "FinOps Foundation KPI guidance",
     url: "https://www.finops.org/framework/capabilities/measuring-unit-cost/",
-  },
-  events: {
-    title: "FinOps Foundation community events",
-    url: "https://www.finops.org/community/events/",
   },
 };
 
@@ -152,6 +139,15 @@ function normalizeText(input) {
 
 function slugify(input) {
   return normalizeText(input).replace(/\s+/g, "-").replace(/-+/g, "-").replace(/^-|-$/g, "");
+}
+
+function cleanSourceTitle(input) {
+  const normalized = normalizeSpace(input)
+    .replace(/^(runbook focus|service optimization|metric to watch|operation|service|metric)\s*:\s*/i, "")
+    .replace(/\(([^)]+)\)/g, " $1")
+    .replace(/\s+/g, " ")
+    .trim();
+  return normalized || "cloud cost signal";
 }
 
 function sha1(input) {
@@ -192,7 +188,11 @@ function hasNumericSpecificity(text) {
 
 function buildTemplateTip(section, source, isoDate) {
   const template = SECTION_TEMPLATES[section];
-  const safeSource = source ?? FALLBACK_SOURCE_BY_SECTION[section];
+  const base = source ?? FALLBACK_SOURCE_BY_SECTION[section];
+  const safeSource = {
+    ...base,
+    focus: cleanSourceTitle(base.title),
+  };
   const body = template.buildBody(safeSource);
   return {
     section,
