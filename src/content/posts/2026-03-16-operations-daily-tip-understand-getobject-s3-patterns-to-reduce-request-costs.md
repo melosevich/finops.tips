@@ -2,7 +2,7 @@
 pubDate: 2026-03-16
 team: "gonzalo-melosevich"
 title: "Understand GetObject S3 patterns to reduce request costs"
-description: "Use GetObject S3 telemetry to cut unnecessary requests before they compound into spend."
+description: "Use GetObject S3 request telemetry and per-call cost baselines to remove high-volume waste before month-end close."
 image:
   url: "/src/images/blog/1.jpg"
   alt: "operations daily tip"
@@ -13,15 +13,15 @@ tags:
 ---
 
 ## What It Is
-GetObject S3 is an operations signal that points to request volume, retries, and transfer behavior affecting your cloud bill.
+GetObject S3 is an API-level spend driver. It can be modeled as `total_cost = requests * unit_request_price + related_transfer + downstream_compute` and broken down by workload, endpoint, and environment.
 
 ## Why It Matters
-Request-heavy paths can drive large spend even when unit prices look small. Tightening API usage lowers both direct request and downstream processing costs.
+Small per-request prices hide large aggregate spend at scale. A single noisy integration can multiply request, transfer, and retry costs, then cascade into Lambda/DB invocations.
 
 ## How to Act
-1. Pull 7 days of request-level cost by workload and environment.
-2. Flag low-value, high-frequency calls and reduce them with caching or batching.
-3. Alert when cost-per-request rises more than 15% over baseline.
+1. Query 14 days of CUR and API logs, grouped by operation, caller, and status code; compute p50/p95 requests per minute.
+2. Build a cost-per-1k-requests baseline for each workload and flag callers with >20% week-over-week drift not explained by traffic.
+3. For top offenders, enforce one control: response caching, retry budget (max attempts), or request batching, then verify 48-hour impact.
 
 ## Example
-If GetObject S3 requests grow 18% week-over-week without matching business growth, cap retries, tune cache TTL, and recheck spend after 48 hours. Source: [Operation: GetObject (S3)](https://finops.tips/archive/posts/104-operations-getobject).
+If GetObject S3 from one service rises from 42M to 56M calls/week (+33%) while business KPIs stay flat, cap retries to 2, add a 300s cache TTL for idempotent reads, and target a 15-25% request-cost reduction in the next billing window. Source: [Operation: GetObject (S3)](https://finops.tips/archive/posts/104-operations-getobject).
