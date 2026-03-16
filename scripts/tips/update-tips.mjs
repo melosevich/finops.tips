@@ -181,6 +181,18 @@ function removeSupersededGeneratedTips(validTips) {
   return removed;
 }
 
+function removeLegacyStaticSectionTips() {
+  const files = fs
+    .readdirSync(POSTS_DIR)
+    .filter((name) => /^\d{3}-(operations|services|metrics)-.+\.md$/.test(name));
+
+  for (const file of files) {
+    fs.unlinkSync(path.join(POSTS_DIR, file));
+  }
+
+  return files;
+}
+
 function parseArgs(argv) {
   const parsed = {
     days: 1,
@@ -207,7 +219,10 @@ function parseArgs(argv) {
 }
 
 function toIsoDate(date) {
-  return date.toISOString().slice(0, 10);
+  const y = date.getFullYear();
+  const m = String(date.getMonth() + 1).padStart(2, "0");
+  const d = String(date.getDate()).padStart(2, "0");
+  return `${y}-${m}-${d}`;
 }
 
 function startOfDay(date) {
@@ -294,6 +309,7 @@ function main() {
   }
 
   const removedSupersededTips = removeSupersededGeneratedTips(valid);
+  const removedLegacyStaticTips = removeLegacyStaticSectionTips();
 
   const writes = {
     created: 0,
@@ -322,6 +338,7 @@ function main() {
     rejectedCount: rejected.length,
     duplicateCount: duplicates.length,
     removedLegacyEventTips: removedLegacyEventTips.length,
+    removedLegacyStaticTips: removedLegacyStaticTips.length,
     removedSupersededTips: removedSupersededTips.length,
     rejectedReasons: summarizeReasonCounts(rejected),
     duplicateReasons: summarizeReasonCounts(duplicates),
@@ -341,6 +358,7 @@ function main() {
   console.log(`- rejected_count=${summary.rejectedCount}`);
   console.log(`- duplicate_count=${summary.duplicateCount}`);
   console.log(`- removed_legacy_event_daily_tips=${summary.removedLegacyEventTips}`);
+  console.log(`- removed_legacy_static_tips=${summary.removedLegacyStaticTips}`);
   console.log(`- removed_superseded_tips=${summary.removedSupersededTips}`);
   console.log(`- writes_created=${summary.writes.created}`);
   console.log(`- writes_updated=${summary.writes.updated}`);
