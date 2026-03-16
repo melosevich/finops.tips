@@ -181,18 +181,6 @@ function removeSupersededGeneratedTips(validTips) {
   return removed;
 }
 
-function removeLegacyStaticSectionTips() {
-  const files = fs
-    .readdirSync(POSTS_DIR)
-    .filter((name) => /^\d{3}-(operations|services|metrics)-.+\.md$/.test(name));
-
-  for (const file of files) {
-    fs.unlinkSync(path.join(POSTS_DIR, file));
-  }
-
-  return files;
-}
-
 function parseArgs(argv) {
   const parsed = {
     days: 1,
@@ -219,10 +207,7 @@ function parseArgs(argv) {
 }
 
 function toIsoDate(date) {
-  const y = date.getFullYear();
-  const m = String(date.getMonth() + 1).padStart(2, "0");
-  const d = String(date.getDate()).padStart(2, "0");
-  return `${y}-${m}-${d}`;
+  return date.toISOString().slice(0, 10);
 }
 
 function startOfDay(date) {
