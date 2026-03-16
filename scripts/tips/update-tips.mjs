@@ -15,6 +15,7 @@ const __dirname = path.dirname(__filename);
 const REPO_ROOT = path.join(__dirname, "..", "..");
 const POSTS_DIR = path.join(REPO_ROOT, "src", "content", "posts");
 const SUMMARY_PATH = path.join(__dirname, ".last-run-summary.json");
+const MS_PER_DAY = 24 * 3600 * 1000;
 
 function normalizeSpace(input) {
   return String(input || "").replace(/\s+/g, " ").trim();
@@ -116,7 +117,7 @@ function removeLegacyEventDailyTips() {
 
 function withinDays(date, now, days) {
   const delta = now.getTime() - date.getTime();
-  return delta >= 0 && delta <= days * 24 * 3600 * 1000;
+  return delta >= 0 && delta <= days * MS_PER_DAY;
 }
 
 function buildRecentSourceMap(generatedHistory) {
@@ -180,36 +181,117 @@ function removeSupersededGeneratedTips(validTips) {
   return removed;
 }
 
+function parseArgs(argv) {
+  const parsed = {
+    days: 1,
+  };
+
+  for (let i = 0; i < argv.length; i += 1) {
+    const arg = argv[i];
+    if (arg === "--days" && argv[i + 1]) {
+      parsed.days = Number.parseInt(argv[i + 1], 10);
+      i += 1;
+      continue;
+    }
+    if (arg.startsWith("--days=")) {
+      parsed.days = Number.parseInt(arg.split("=")[1], 10);
+      continue;
+    }
+  }
+
+  if (!Number.isInteger(parsed.days) || parsed.days < 1 || parsed.days > 365) {
+    throw new Error(`Invalid --days value: ${parsed.days}. Expected integer between 1 and 365.`);
+  }
+
+  return parsed;
+}
+
+function toIsoDate(date) {
+  return date.toISOString().slice(0, 10);
+}
+
+function startOfDay(date) {
+  return new Date(date.getFullYear(), date.getMonth(), date.getDate());
+}
+
+function addDays(date, delta) {
+  return new Date(date.getTime() + delta * MS_PER_DAY);
+}
+
 function main() {
+  const { days } = parseArgs(process.argv.slice(2));
   const now = new Date();
-  const startOfToday = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  const startOfToday = startOfDay(now);
+  const earliestDate = addDays(startOfToday, -(days - 1));
   const removedLegacyEventTips = removeLegacyEventDailyTips();
   const allPosts = listPosts();
-  const generatedHistory = allPosts.filter(
-    (post) => post.generated && post.pubDate < startOfToday && withinDays(post.pubDate, now, 60),
-  );
-
-  const sourceUniverse = allPosts.filter((post) => {
-    const section = SECTIONS.find((candidate) => post.tags.includes(candidate));
-    if (!section) return false;
-    if (!post.title || !post.description) return false;
-    return true;
-  });
-
-  const recentSourceSlugsBySection = buildRecentSourceMap(generatedHistory);
-
-  const { valid, rejected, duplicates } = generateSectionTips({
-    now,
-    sources: sourceUniverse,
-    history: generatedHistory.map((post) => ({
+  const existingGeneratedHistory = allPosts
+    .filter((post) => post.generated)
+    .map((post) => ({
       section: SECTIONS.find((candidate) => post.tags.includes(candidate)),
       title: post.title,
       description: post.description,
       body: post.body,
       slug: post.slug,
-    })),
-    recentSourceSlugsBySection,
+      pubDate: toIsoDate(post.pubDate),
+    }))
+    .filter((post) => post.section);
+
+  const sourceUniverse = allPosts.filter((post) => {
+    const section = SECTIONS.find((candidate) => post.tags.includes(candidate));
+    return Boolean(section && post.title && post.description);
   });
+
+  const valid = [];
+  const rejected = [];
+  const duplicates = [];
+  const generatedInRun = [];
+
+  for (let offset = days - 1; offset >= 0; offset -= 1) {
+    const runDay = addDays(startOfToday, -offset);
+    const runDayIso = toIsoDate(runDay);
+
+    const historyForRun = [...existingGeneratedHistory, ...generatedInRun].filter((item) => {
+      if (!item.pubDate) return false;
+      return item.pubDate < runDayIso && withinDays(new Date(item.pubDate), runDay, 60);
+    });
+
+    const recentSourceSlugsBySection = buildRecentSourceMap(
+      historyForRun.map((item) => ({
+        ...item,
+        tags: [item.section],
+      })),
+    );
+
+    const scopedSources = sourceUniverse.filter((post) => {
+      const postIso = toIsoDate(post.pubDate);
+      return postIso <= runDayIso;
+    });
+
+    const runResult = generateSectionTips({
+      now: runDay,
+      sources: scopedSources,
+      history: historyForRun,
+      recentSourceSlugsBySection,
+      // Backfills should materialize one tip per section/day even if phrasing is similar.
+      duplicateThreshold: days > 1 ? 1.01 : 0.72,
+    });
+
+    for (const tip of runResult.valid) {
+      valid.push(tip);
+      generatedInRun.push({
+        section: tip.section,
+        title: tip.title,
+        description: tip.description,
+        body: tip.body,
+        slug: makeTipFileName(tip).replace(/\.md$/, ""),
+        pubDate: tip.pubDate,
+      });
+    }
+
+    rejected.push(...runResult.rejected);
+    duplicates.push(...runResult.duplicates);
+  }
 
   const removedSupersededTips = removeSupersededGeneratedTips(valid);
 
@@ -231,7 +313,10 @@ function main() {
 
   const summary = {
     generatedAt: now.toISOString(),
-    sectionsExpected: SECTIONS.length,
+    backfillDays: days,
+    dateFrom: toIsoDate(earliestDate),
+    dateTo: toIsoDate(startOfToday),
+    sectionsExpected: SECTIONS.length * days,
     sectionsGenerated: valid.length,
     generatedCount: valid.length,
     rejectedCount: rejected.length,
@@ -247,6 +332,9 @@ function main() {
   fs.writeFileSync(SUMMARY_PATH, `${JSON.stringify(summary, null, 2)}\n`, "utf-8");
 
   console.log("Tip generation summary:");
+  console.log(`- backfill_days=${summary.backfillDays}`);
+  console.log(`- date_from=${summary.dateFrom}`);
+  console.log(`- date_to=${summary.dateTo}`);
   console.log(`- sections_expected=${summary.sectionsExpected}`);
   console.log(`- sections_generated=${summary.sectionsGenerated}`);
   console.log(`- generated_count=${summary.generatedCount}`);
