@@ -1,0 +1,57 @@
+[
+  {
+    "name": "accept eu iso country",
+    "input": {
+      "sourceId": "aws-summits",
+      "sourceName": "AWS Summits",
+      "url": "https://aws.amazon.com/events/summits/london",
+      "title": "AWS Summit London",
+      "description": "desc",
+      "startDate": "2026-04-22T09:00:00Z",
+      "location": { "online": false, "city": "London", "country": "GB" }
+    },
+    "valid": true
+  },
+  {
+    "name": "reject online missing timezone",
+    "input": {
+      "sourceId": "finopsdk",
+      "sourceName": "FinOpsDK",
+      "url": "https://finopsdk.org/events/abc",
+      "title": "Online FinOps Event",
+      "description": "desc",
+      "startDate": "2026-03-20T10:00:00Z",
+      "location": { "online": true }
+    },
+    "valid": false,
+    "reason": "ONLINE_MISSING_TIMEZONE"
+  },
+  {
+    "name": "reject non europe location",
+    "input": {
+      "sourceId": "microsoft-events",
+      "sourceName": "Microsoft Events",
+      "url": "https://www.microsoft.com/events/xyz",
+      "title": "US Cloud Event",
+      "description": "desc",
+      "startDate": "2026-03-19T10:00:00Z",
+      "location": { "online": false, "city": "Seattle", "country": "United States" }
+    },
+    "valid": false,
+    "reason": "NON_EUROPE_LOCATION"
+  },
+  {
+    "name": "reject missing title",
+    "input": {
+      "sourceId": "finops-foundation",
+      "sourceName": "FinOps Foundation",
+      "url": "https://www.finops.org/community/events/foo",
+      "title": "",
+      "description": "desc",
+      "startDate": "2026-03-19T10:00:00Z",
+      "location": { "online": false, "city": "Berlin", "country": "Germany" }
+    },
+    "valid": false,
+    "reason": "MISSING_TITLE"
+  }
+]

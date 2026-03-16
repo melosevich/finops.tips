@@ -24,6 +24,7 @@ import { fileURLToPath } from "node:url";
 import crypto from "node:crypto";
 
 import * as cheerio from "cheerio";
+import { dedupeEvents, stableContentHash, validateEvents } from "./pipeline-core.mjs";
 
 let chromium;
 try {
@@ -39,16 +40,7 @@ const __dirname = path.dirname(__filename);
 const REPO_ROOT = path.resolve(__dirname, "../..");
 const SOURCES_PATH = path.join(REPO_ROOT, "scripts/events/sources.json");
 const POSTS_DIR = path.join(REPO_ROOT, "src/content/posts");
-
-const EURO_COUNTRIES = new Set([
-  // EU
-  "Austria","Belgium","Bulgaria","Croatia","Cyprus","Czech Republic","Denmark","Estonia","Finland","France",
-  "Germany","Greece","Hungary","Ireland","Italy","Latvia","Lithuania","Luxembourg","Malta","Netherlands",
-  "Poland","Portugal","Romania","Slovakia","Slovenia","Spain","Sweden",
-  // plus
-  "United Kingdom","UK","England","Scotland","Wales","Northern Ireland",
-  "Switzerland","Norway",
-]);
+const SUMMARY_PATH = path.join(__dirname, ".last-run-summary.json");
 
 function slugify(input) {
   return input
@@ -170,18 +162,6 @@ function parseLocation(loc) {
   return { venue, city, country, online: false, raw };
 }
 
-function isEuropeLocation(loc) {
-  if (!loc) return false;
-  if (loc.online) return true; // further check should rely on timezone presence
-  const c = (loc.country || "").trim();
-  if (!c) return false;
-  if (EURO_COUNTRIES.has(c)) return true;
-  // tolerate ISO codes
-  const iso = c.toUpperCase();
-  if (["DE","DK","SE","NO","CH","UK","GB","FR","ES","NL","BE","PL","IT","IE","PT","FI","AT"].includes(iso)) return true;
-  return false;
-}
-
 function extractOg($) {
   const og = (p) => $("meta[property='" + p + "']").attr("content") || "";
   return {
@@ -254,16 +234,10 @@ function normalizeEvent({ source, url, jsonld, html }) {
     if (!timezone && fb.location?.timezone) timezone = fb.location.timezone;
   }
 
-  const europeOk = loc && isEuropeLocation(loc) && (!loc.online || Boolean(timezone));
-
-  if (!title) return null;
-  if (!startDate || Number.isNaN(startDate.getTime())) return null;
-  if (!loc) return null;
-  if (!europeOk) return null;
-
   return {
     sourceId: source.id,
     sourceName: source.name,
+    sourceEventId: String(jsonld?.identifier || jsonld?.["@id"] || "").trim() || undefined,
     hostTag: source.hostTag,
     hostLogo: source.logo,
     url,
@@ -349,16 +323,15 @@ function safeJsonParse(s) {
   }
 }
 
-function normalizeAdapterEvent({ source, url, title, description, startDate, location }) {
+function normalizeAdapterEvent({ source, sourceEventId, url, title, description, startDate, location }) {
   // location: { online?, venue?, city?, country?, timezone? }
+  // Keep this permissive and let centralized validator emit reason codes.
   const loc = location || {};
-
-  const europeOk = isEuropeLocation(loc) && (!loc.online || Boolean(loc.timezone));
-  if (!title || !startDate || Number.isNaN(startDate.getTime()) || !europeOk) return null;
 
   return {
     sourceId: source.id,
     sourceName: source.name,
+    sourceEventId: sourceEventId ? String(sourceEventId).trim() : undefined,
     hostTag: source.hostTag,
     hostLogo: source.logo,
     url,
@@ -444,6 +417,7 @@ async function crawlAwsSummits(source) {
     const loc = { online: false, venue, city, country };
     const normalized = normalizeAdapterEvent({
       source,
+      sourceEventId: item.id || af.id,
       url,
       title,
       description,
@@ -519,6 +493,7 @@ async function crawlMicrosoftEvents(source) {
 
       const normalized = normalizeAdapterEvent({
         source,
+        sourceEventId: content.id || c.id,
         url,
         title,
         description,
@@ -559,6 +534,32 @@ function extractCandidateLinks(listHtml, listUrl) {
     if (ev?.url) urls.add(new URL(ev.url, listUrl).toString());
   }
   return [...urls];
+}
+
+function countByReason(items) {
+  const counts = new Map();
+  for (const item of items) {
+    const reason = item.reason || "UNKNOWN";
+    counts.set(reason, (counts.get(reason) || 0) + 1);
+  }
+  return [...counts.entries()]
+    .sort((a, b) => a[0].localeCompare(b[0]))
+    .map(([reason, count]) => `${reason}=${count}`)
+    .join(", ");
+}
+
+function writeFileIfChanged(filePath, content) {
+  const nextHash = stableContentHash(content);
+  if (!fs.existsSync(filePath)) {
+    fs.writeFileSync(filePath, content, "utf-8");
+    return "created";
+  }
+
+  const current = fs.readFileSync(filePath, "utf-8");
+  if (stableContentHash(current) === nextHash) return "unchanged";
+
+  fs.writeFileSync(filePath, content, "utf-8");
+  return "updated";
 }
 
 async function crawlSource(source) {
@@ -627,19 +628,55 @@ async function main() {
     }
   }
 
-  // write posts
-  const written = [];
-  for (const ev of all) {
+  const { valid, rejected } = validateEvents(all, {
+    allowedSourceIds: sources.map((s) => s.id),
+  });
+  const { events: deduped, duplicates } = dedupeEvents(valid);
+
+  const writeStats = { created: 0, updated: 0, unchanged: 0 };
+  for (const ev of deduped) {
     const filename = pickFilename(ev);
     const fp = path.join(POSTS_DIR, filename);
-    fs.writeFileSync(fp, eventToMarkdown(ev), "utf-8");
-    written.push(filename);
+    const status = writeFileIfChanged(fp, eventToMarkdown(ev));
+    writeStats[status] += 1;
   }
 
-  console.log(`\nWrote/updated ${written.length} event posts.`);
-  if (!written.length) {
+  console.log("\nRun summary");
+  console.log(`- candidate_count=${all.length}`);
+  console.log(`- valid_count=${valid.length}`);
+  console.log(`- rejected_count=${rejected.length}`);
+  if (rejected.length) {
+    console.log(`- rejected_reasons=${countByReason(rejected)}`);
+  }
+  console.log(`- duplicate_count=${duplicates.length}`);
+  console.log(`- write_created=${writeStats.created}`);
+  console.log(`- write_updated=${writeStats.updated}`);
+  console.log(`- write_unchanged=${writeStats.unchanged}`);
+
+  const summary = {
+    generatedAt: new Date().toISOString(),
+    candidateCount: all.length,
+    validCount: valid.length,
+    rejectedCount: rejected.length,
+    duplicateCount: duplicates.length,
+    rejectedReasons: countByReasonMap(rejected),
+    duplicateReasons: countByReasonMap(duplicates),
+    writes: writeStats,
+  };
+  fs.writeFileSync(SUMMARY_PATH, `${JSON.stringify(summary, null, 2)}\n`, "utf-8");
+
+  if (!deduped.length) {
     console.log("No events extracted. This can happen if sources don’t expose JSON-LD or links are JS-driven.");
   }
+}
+
+function countByReasonMap(items) {
+  const map = {};
+  for (const it of items) {
+    const key = it.reason || "UNKNOWN";
+    map[key] = (map[key] || 0) + 1;
+  }
+  return map;
 }
 
 main().catch((e) => {

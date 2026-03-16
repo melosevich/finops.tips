@@ -9,7 +9,12 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "events:update": "node scripts/events/update-events.mjs"
+    "events:update": "node scripts/events/update-events.mjs",
+    "events:test": "node --test scripts/events/tests/*.test.mjs",
+    "tips:update": "node scripts/tips/update-tips.mjs",
+    "tips:test": "node --test scripts/tips/tests/*.test.mjs",
+    "content:update:daily": "node scripts/automation/run-daily-update.mjs",
+    "content:update:daily:ci": "DAILY_UPDATE_RETRY_ATTEMPTS=3 DAILY_UPDATE_RETRY_BACKOFF_MS=15000 node scripts/automation/run-daily-update.mjs"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.13",
