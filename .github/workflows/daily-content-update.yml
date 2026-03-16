@@ -1,0 +1,155 @@
+name: Daily Content Update
+
+on:
+  schedule:
+    # Run at both UTC offsets and gate to 20:00 Europe/Copenhagen inside the job.
+    - cron: "0 18 * * *"
+    - cron: "0 19 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+  actions: read
+
+jobs:
+  daily-update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Resolve Copenhagen run window
+        id: schedule
+        shell: bash
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            should_run=true
+          else
+            local_hour=$(TZ=Europe/Copenhagen date +%H)
+            if [ "$local_hour" = "20" ]; then
+              should_run=true
+            else
+              should_run=false
+            fi
+          fi
+
+          run_date=$(TZ=Europe/Copenhagen date +%F)
+          run_time=$(TZ=Europe/Copenhagen date +"%Y-%m-%d %H:%M:%S %Z")
+
+          echo "should_run=$should_run" >> "$GITHUB_OUTPUT"
+          echo "run_date=$run_date" >> "$GITHUB_OUTPUT"
+          echo "run_time=$run_time" >> "$GITHUB_OUTPUT"
+
+      - name: Skip outside schedule window
+        if: steps.schedule.outputs.should_run != 'true'
+        run: |
+          echo "Skipping run. Not 20:00 Europe/Copenhagen."
+          echo "- now_copenhagen=${{ steps.schedule.outputs.run_time }}" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Setup Node
+        if: steps.schedule.outputs.should_run == 'true'
+        uses: actions/setup-node@v5
+        with:
+          node-version: "20"
+          cache: npm
+
+      - name: Install dependencies
+        if: steps.schedule.outputs.should_run == 'true'
+        run: npm ci
+
+      - name: Run daily content orchestration
+        if: steps.schedule.outputs.should_run == 'true'
+        env:
+          DAILY_UPDATE_RETRY_ATTEMPTS: "3"
+          DAILY_UPDATE_RETRY_BACKOFF_MS: "15000"
+        run: npm run content:update:daily
+
+      - name: Detect content changes
+        if: steps.schedule.outputs.should_run == 'true'
+        id: changes
+        shell: bash
+        run: |
+          if git diff --quiet; then
+            echo "has_changes=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_changes=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Set deterministic branch name
+        if: steps.schedule.outputs.should_run == 'true' && steps.changes.outputs.has_changes == 'true'
+        id: branch
+        run: |
+          echo "name=automation/daily-content-${{ steps.schedule.outputs.run_date }}" >> "$GITHUB_OUTPUT"
+
+      - name: Commit and push updates
+        if: steps.schedule.outputs.should_run == 'true' && steps.changes.outputs.has_changes == 'true'
+        shell: bash
+        run: |
+          branch_name="${{ steps.branch.outputs.name }}"
+          git config user.name "finops-tips-bot"
+          git config user.email "actions@users.noreply.github.com"
+
+          git checkout -B "$branch_name"
+          git add src/content/posts scripts/events/.last-run-summary.json scripts/tips/.last-run-summary.json scripts/automation/.last-run-summary.json scripts/automation/.last-run-summary.md
+          git commit -m "chore(content): daily update for ${{ steps.schedule.outputs.run_date }}"
+          git push --force-with-lease origin "$branch_name"
+
+      - name: Create or update pull request
+        if: steps.schedule.outputs.should_run == 'true' && steps.changes.outputs.has_changes == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          branch_name="${{ steps.branch.outputs.name }}"
+          pr_title="chore(content): daily update ${{ steps.schedule.outputs.run_date }}"
+          pr_body_file="scripts/automation/.last-run-summary.md"
+          existing_pr_number="$(gh pr list --state open --head \"$branch_name\" --json number --jq '.[0].number')"
+
+          if [ -n "$existing_pr_number" ] && [ "$existing_pr_number" != "null" ]; then
+            gh pr edit "$existing_pr_number" --title "$pr_title" --body-file "$pr_body_file"
+          else
+            gh pr create \
+              --base main \
+              --head "$branch_name" \
+              --title "$pr_title" \
+              --body-file "$pr_body_file"
+          fi
+
+      - name: Append run summary
+        if: steps.schedule.outputs.should_run == 'true'
+        shell: bash
+        run: |
+          if [ -f scripts/automation/.last-run-summary.md ]; then
+            cat scripts/automation/.last-run-summary.md >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "No run summary file was produced." >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Notify on failure
+        if: steps.schedule.outputs.should_run == 'true' && failure()
+        shell: bash
+        env:
+          ALERT_WEBHOOK: ${{ secrets.DAILY_UPDATE_ALERT_WEBHOOK }}
+        run: |
+          run_url="https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          echo "Daily content update failed. Run: $run_url" >> "$GITHUB_STEP_SUMMARY"
+
+          if [ -n "$ALERT_WEBHOOK" ]; then
+            payload=$(printf '{"text":"Daily content automation failed (%s). Run: %s"}' "${{ steps.schedule.outputs.run_date }}" "$run_url")
+            curl -sS -X POST "$ALERT_WEBHOOK" -H "Content-Type: application/json" -d "$payload" >/dev/null
+          else
+            echo "DAILY_UPDATE_ALERT_WEBHOOK not configured; no external notification sent." >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Upload run artifacts
+        if: steps.schedule.outputs.should_run == 'true' && always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: daily-content-update-${{ steps.schedule.outputs.run_date }}
+          path: |
+            scripts/events/.last-run-summary.json
+            scripts/tips/.last-run-summary.json
+            scripts/automation/.last-run-summary.json
+            scripts/automation/.last-run-summary.md
+          if-no-files-found: warn

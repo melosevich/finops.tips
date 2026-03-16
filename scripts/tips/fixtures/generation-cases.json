@@ -1,0 +1,41 @@
+{
+  "now": "2026-03-16T20:00:00.000Z",
+  "sources": [
+    {
+      "slug": "101-operations-putobject",
+      "title": "Operation: PutObject (S3)",
+      "description": "Detect write request waste before it compounds.",
+      "pubDate": "2026-03-11",
+      "tags": ["operations"],
+      "body": "PutObject can trigger millions of requests and hidden charges.",
+      "url": "https://finops.tips/archive/posts/101-operations-putobject"
+    },
+    {
+      "slug": "204-services-lambda",
+      "title": "Service: AWS Lambda",
+      "description": "Manage invocation and duration spend.",
+      "pubDate": "2026-03-12",
+      "tags": ["services"],
+      "body": "Lambda burst traffic can create noisy cost spikes.",
+      "url": "https://finops.tips/archive/posts/204-services-lambda"
+    },
+    {
+      "slug": "302-metrics-unit-cost",
+      "title": "Metric: Unit Cost",
+      "description": "Track spend per business unit.",
+      "pubDate": "2026-03-13",
+      "tags": ["metrics"],
+      "body": "Unit cost by transaction highlights hidden inefficiency.",
+      "url": "https://finops.tips/archive/posts/302-metrics-unit-cost"
+    },
+    {
+      "slug": "2026-03-19-events-agentic-devops-day",
+      "title": "Agentic DevOps Day",
+      "description": "Upcoming Copenhagen event.",
+      "pubDate": "2026-03-19",
+      "tags": ["events"],
+      "body": "Event discussion focused on agentic engineering operations.",
+      "url": "https://finops.tips/archive/posts/2026-03-19-events-agentic-devops-day"
+    }
+  ]
+}

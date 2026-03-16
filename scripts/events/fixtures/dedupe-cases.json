@@ -1,0 +1,46 @@
+{
+  "events": [
+    {
+      "sourceId": "aws-summits",
+      "sourceName": "AWS Summits",
+      "sourceEventId": "aws-london-2026",
+      "url": "https://aws.amazon.com/events/summits/london",
+      "title": "AWS Summit London",
+      "description": "desc",
+      "startDate": "2026-04-22T09:00:00Z",
+      "location": { "online": false, "city": "London", "country": "United Kingdom" }
+    },
+    {
+      "sourceId": "aws-summits",
+      "sourceName": "AWS Summits",
+      "sourceEventId": "aws-london-2026",
+      "url": "https://aws.amazon.com/events/summits/london?ref=dup",
+      "title": "AWS Summit London Duplicate",
+      "description": "desc",
+      "startDate": "2026-04-22T09:00:00Z",
+      "location": { "online": false, "city": "London", "country": "United Kingdom" }
+    },
+    {
+      "sourceId": "microsoft-events",
+      "sourceName": "Microsoft Events",
+      "url": "https://www.microsoft.com/events/london-cloud-day",
+      "title": "Cloud Day London 2026",
+      "description": "desc",
+      "startDate": "2026-05-01T09:00:00Z",
+      "location": { "online": false, "city": "London", "country": "United Kingdom" }
+    },
+    {
+      "sourceId": "microsoft-events",
+      "sourceName": "Microsoft Events",
+      "url": "https://www.microsoft.com/events/london-cloud-day-v2",
+      "title": "Cloud Day London 2026",
+      "description": "desc",
+      "startDate": "2026-05-01T11:00:00Z",
+      "location": { "online": false, "city": "London", "country": "United Kingdom" }
+    }
+  ],
+  "expect": {
+    "dedupedCount": 2,
+    "duplicateCount": 2
+  }
+}
