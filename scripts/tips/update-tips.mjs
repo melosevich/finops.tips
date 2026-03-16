@@ -294,6 +294,7 @@ function main() {
   }
 
   const removedSupersededTips = removeSupersededGeneratedTips(valid);
+  const removedLegacyStaticTips = removeLegacyStaticSectionTips();
 
   const writes = {
     created: 0,
@@ -322,6 +323,7 @@ function main() {
     rejectedCount: rejected.length,
     duplicateCount: duplicates.length,
     removedLegacyEventTips: removedLegacyEventTips.length,
+    removedLegacyStaticTips: removedLegacyStaticTips.length,
     removedSupersededTips: removedSupersededTips.length,
     rejectedReasons: summarizeReasonCounts(rejected),
     duplicateReasons: summarizeReasonCounts(duplicates),
@@ -341,6 +343,7 @@ function main() {
   console.log(`- rejected_count=${summary.rejectedCount}`);
   console.log(`- duplicate_count=${summary.duplicateCount}`);
   console.log(`- removed_legacy_event_daily_tips=${summary.removedLegacyEventTips}`);
+  console.log(`- removed_legacy_static_tips=${summary.removedLegacyStaticTips}`);
   console.log(`- removed_superseded_tips=${summary.removedSupersededTips}`);
   console.log(`- writes_created=${summary.writes.created}`);
   console.log(`- writes_updated=${summary.writes.updated}`);
