@@ -1,8 +1,8 @@
 ---
-pubDate: 2026-03-07
+pubDate: 2026-02-15
 team: "gonzalo-melosevich"
-title: "Tune FinOps Foundation pricing and rate optimization usage before it scales your bill"
-description: "Turn FinOps Foundation pricing and rate optimization usage shape into a concrete architecture plus commitment strategy with expected savings."
+title: "Refactor FinOps Foundation pricing and rate optimization usage before it scales your bill"
+description: "Convert FinOps Foundation pricing and rate optimization usage shape into a concrete architecture plus commitment strategy with expected savings."
 image:
   url: "/src/images/blog/1.jpg"
   alt: "services daily tip"

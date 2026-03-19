@@ -1,8 +1,8 @@
 ---
-pubDate: 2026-03-18
+pubDate: 2026-02-27
 team: "gonzalo-melosevich"
 title: "Understand FinOps Foundation operations playbook patterns to reduce request costs"
-description: "Quantify FinOps Foundation operations playbook request telemetry and per-call cost baselines to remove high-volume waste before month-end close."
+description: "Map FinOps Foundation operations playbook request telemetry and per-call cost baselines to remove high-volume waste before month-end close."
 image:
   url: "/src/images/blog/1.jpg"
   alt: "operations daily tip"
@@ -16,7 +16,7 @@ tags:
 FinOps Foundation operations playbook is an API-level spend driver. It can be modeled as `total_cost = requests * unit_request_price + related_transfer + downstream_compute` and broken down by workload, endpoint, and environment.
 
 ## Why It Matters
-High-frequency operational behavior can quietly amplify cloud costs. A single noisy integration can multiply request, transfer, and retry costs, then cascade into Lambda/DB invocations.
+Request-heavy paths can drive large spend even when unit prices look small. A single noisy integration can multiply request, transfer, and retry costs, then cascade into Lambda/DB invocations.
 
 ## How to Act
 1. Query 14 days of CUR and API logs, grouped by operation, caller, and status code; compute p50/p95 requests per minute.

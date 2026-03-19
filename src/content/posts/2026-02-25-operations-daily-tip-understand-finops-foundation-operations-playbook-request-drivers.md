@@ -1,8 +1,8 @@
 ---
-pubDate: 2026-03-18
+pubDate: 2026-02-25
 team: "gonzalo-melosevich"
-title: "Understand FinOps Foundation operations playbook patterns to reduce request costs"
-description: "Quantify FinOps Foundation operations playbook request telemetry and per-call cost baselines to remove high-volume waste before month-end close."
+title: "Understand FinOps Foundation operations playbook request drivers behind hidden cloud spend"
+description: "Correlate FinOps Foundation operations playbook request telemetry and per-call cost baselines to remove high-volume waste before month-end close."
 image:
   url: "/src/images/blog/1.jpg"
   alt: "operations daily tip"
