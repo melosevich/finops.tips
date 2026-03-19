@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-19T14:08:18.587Z",
+  "generatedAt": "2026-03-19T14:16:03.213Z",
   "backfillDays": 35,
   "dateFrom": "2026-02-12",
   "dateTo": "2026-03-18",
@@ -10,538 +10,538 @@
   "duplicateCount": 0,
   "removedLegacyEventTips": 0,
   "removedLegacyStaticTips": 0,
-  "removedSupersededTips": 18,
+  "removedSupersededTips": 105,
   "rejectedReasons": {},
   "duplicateReasons": {},
   "writes": {
-    "created": 15,
+    "created": 105,
     "updated": 0,
-    "unchanged": 90
+    "unchanged": 0
   },
   "files": [
     {
-      "fileName": "2026-02-12-operations-daily-tip-control-finops-foundation-operations-playbook-waste-signals-befo.md",
+      "fileName": "2026-02-12-operations-daily-tip-understand-cache-hit-ratio-drift-traffic-behavior-before-costs-c.md",
       "state": "created",
       "section": "operations"
     },
     {
-      "fileName": "2026-02-12-services-daily-tip-refactor-finops-foundation-pricing-and-rate-optimization-usage-b.md",
+      "fileName": "2026-02-12-services-daily-tip-rebalance-managed-database-idle-headroom-service-cost-posture-be.md",
       "state": "created",
       "section": "services"
     },
     {
-      "fileName": "2026-02-12-metrics-daily-tip-measure-finops-foundation-kpi-guidance-and-route-ownership-befor.md",
+      "fileName": "2026-02-12-metrics-daily-tip-benchmark-costperenvironment-variance-with-thresholds-that-trigg.md",
       "state": "created",
       "section": "metrics"
     },
     {
-      "fileName": "2026-02-13-operations-daily-tip-streamline-finops-foundation-operations-playbook-waste-signals-b.md",
+      "fileName": "2026-02-13-operations-daily-tip-diagnose-api-retry-volume-request-drivers-behind-hidden-cloud-sp.md",
       "state": "created",
       "section": "operations"
     },
     {
-      "fileName": "2026-02-13-services-daily-tip-optimize-finops-foundation-pricing-and-rate-optimization-usage-b.md",
+      "fileName": "2026-02-13-services-daily-tip-optimize-compute-rightsizing-coverage-consumption-shape-before-m.md",
       "state": "created",
       "section": "services"
     },
     {
-      "fileName": "2026-02-13-metrics-daily-tip-watch-finops-foundation-kpi-guidance-and-route-ownership-before-.md",
+      "fileName": "2026-02-13-metrics-daily-tip-measure-commitment-coverage-gap-before-variance-turns-into-overs.md",
       "state": "created",
       "section": "metrics"
     },
     {
-      "fileName": "2026-02-14-operations-daily-tip-analyze-finops-foundation-operations-playbook-patterns-to-reduce.md",
+      "fileName": "2026-02-14-operations-daily-tip-analyze-idle-request-amplification-waste-signals-before-they-hit.md",
       "state": "created",
       "section": "operations"
     },
     {
-      "fileName": "2026-02-14-services-daily-tip-tune-finops-foundation-pricing-and-rate-optimization-usage-befor.md",
+      "fileName": "2026-02-14-services-daily-tip-refactor-savings-plan-utilization-spend-with-architecture-and-co.md",
       "state": "created",
       "section": "services"
     },
     {
-      "fileName": "2026-02-14-metrics-daily-tip-track-finops-foundation-kpi-guidance-before-variance-turns-into-.md",
+      "fileName": "2026-02-14-metrics-daily-tip-monitor-wasterate-trend-to-catch-cloud-waste-early.md",
       "state": "created",
       "section": "metrics"
     },
     {
-      "fileName": "2026-02-15-operations-daily-tip-analyze-finops-foundation-operations-playbook-waste-signals-befo.md",
+      "fileName": "2026-02-15-operations-daily-tip-streamline-batch-window-inefficiency-traffic-behavior-before-cos.md",
       "state": "created",
       "section": "operations"
     },
     {
-      "fileName": "2026-02-15-services-daily-tip-refactor-finops-foundation-pricing-and-rate-optimization-usage-b.md",
+      "fileName": "2026-02-15-services-daily-tip-refactor-compute-rightsizing-coverage-service-cost-posture-befor.md",
       "state": "created",
       "section": "services"
     },
     {
-      "fileName": "2026-02-15-metrics-daily-tip-measure-finops-foundation-kpi-guidance-before-variance-turns-int.md",
+      "fileName": "2026-02-15-metrics-daily-tip-watch-commitment-coverage-gap-with-thresholds-that-trigger-actio.md",
       "state": "created",
       "section": "metrics"
     },
     {
-      "fileName": "2026-02-16-operations-daily-tip-control-finops-foundation-operations-playbook-patterns-to-reduce.md",
+      "fileName": "2026-02-16-operations-daily-tip-understand-batch-window-inefficiency-waste-signals-before-they-h.md",
       "state": "created",
       "section": "operations"
     },
     {
-      "fileName": "2026-02-16-services-daily-tip-rebalance-finops-foundation-pricing-and-rate-optimization-consum.md",
+      "fileName": "2026-02-16-services-daily-tip-tune-storage-tiering-posture-usage-before-it-scales-your-bill.md",
       "state": "created",
       "section": "services"
     },
     {
-      "fileName": "2026-02-16-metrics-daily-tip-benchmark-finops-foundation-kpi-guidance-with-thresholds-that-tr.md",
+      "fileName": "2026-02-16-metrics-daily-tip-watch-effective-savings-rate-to-catch-cloud-waste-early.md",
       "state": "created",
       "section": "metrics"
     },
     {
-      "fileName": "2026-02-17-operations-daily-tip-streamline-finops-foundation-operations-playbook-request-drivers.md",
-      "state": "unchanged",
+      "fileName": "2026-02-17-operations-daily-tip-streamline-api-retry-volume-request-drivers-behind-hidden-cloud-.md",
+      "state": "created",
       "section": "operations"
     },
     {
-      "fileName": "2026-02-17-services-daily-tip-rightsize-finops-foundation-pricing-and-rate-optimization-spend-.md",
-      "state": "unchanged",
+      "fileName": "2026-02-17-services-daily-tip-refactor-managed-database-idle-headroom-service-cost-posture-bef.md",
+      "state": "created",
       "section": "services"
     },
     {
-      "fileName": "2026-02-17-metrics-daily-tip-measure-finops-foundation-kpi-guidance-before-variance-turns-int.md",
-      "state": "unchanged",
+      "fileName": "2026-02-17-metrics-daily-tip-track-unit-cost-per-transaction-with-thresholds-that-trigger-act.md",
+      "state": "created",
       "section": "metrics"
     },
     {
-      "fileName": "2026-02-18-operations-daily-tip-streamline-finops-foundation-operations-playbook-waste-signals-b.md",
-      "state": "unchanged",
+      "fileName": "2026-02-18-operations-daily-tip-understand-idle-request-amplification-request-drivers-behind-hid.md",
+      "state": "created",
       "section": "operations"
     },
     {
-      "fileName": "2026-02-18-services-daily-tip-rebalance-finops-foundation-pricing-and-rate-optimization-usage-.md",
-      "state": "unchanged",
+      "fileName": "2026-02-18-services-daily-tip-tune-compute-rightsizing-coverage-spend-with-architecture-and-co.md",
+      "state": "created",
       "section": "services"
     },
     {
-      "fileName": "2026-02-18-metrics-daily-tip-monitor-finops-foundation-kpi-guidance-and-route-ownership-befor.md",
-      "state": "unchanged",
+      "fileName": "2026-02-18-metrics-daily-tip-measure-costperenvironment-variance-to-catch-cloud-waste-early.md",
+      "state": "created",
       "section": "metrics"
     },
     {
-      "fileName": "2026-02-19-operations-daily-tip-control-finops-foundation-operations-playbook-traffic-behavior-b.md",
-      "state": "unchanged",
+      "fileName": "2026-02-19-operations-daily-tip-streamline-api-retry-volume-waste-signals-before-they-hit-your-i.md",
+      "state": "created",
       "section": "operations"
     },
     {
-      "fileName": "2026-02-19-services-daily-tip-rightsize-finops-foundation-pricing-and-rate-optimization-servic.md",
-      "state": "unchanged",
+      "fileName": "2026-02-19-services-daily-tip-rebalance-burst-capacity-overprovisioning-service-cost-posture-b.md",
+      "state": "created",
       "section": "services"
     },
     {
-      "fileName": "2026-02-19-metrics-daily-tip-monitor-finops-foundation-kpi-guidance-before-variance-turns-int.md",
-      "state": "unchanged",
+      "fileName": "2026-02-19-metrics-daily-tip-benchmark-effective-savings-rate-with-thresholds-that-trigger-ac.md",
+      "state": "created",
       "section": "metrics"
     },
     {
-      "fileName": "2026-02-20-operations-daily-tip-understand-finops-foundation-operations-playbook-patterns-to-red.md",
-      "state": "unchanged",
+      "fileName": "2026-02-20-operations-daily-tip-diagnose-idle-request-amplification-request-drivers-behind-hidde.md",
+      "state": "created",
       "section": "operations"
     },
     {
-      "fileName": "2026-02-20-services-daily-tip-refactor-finops-foundation-pricing-and-rate-optimization-spend-w.md",
-      "state": "unchanged",
+      "fileName": "2026-02-20-services-daily-tip-tune-compute-rightsizing-coverage-consumption-shape-before-month.md",
+      "state": "created",
       "section": "services"
     },
     {
-      "fileName": "2026-02-20-metrics-daily-tip-track-finops-foundation-kpi-guidance-with-thresholds-that-trigge.md",
-      "state": "unchanged",
+      "fileName": "2026-02-20-metrics-daily-tip-measure-unit-cost-per-transaction-and-route-ownership-before-dri.md",
+      "state": "created",
       "section": "metrics"
     },
     {
-      "fileName": "2026-02-21-operations-daily-tip-streamline-finops-foundation-operations-playbook-waste-signals-b.md",
-      "state": "unchanged",
+      "fileName": "2026-02-21-operations-daily-tip-control-idle-request-amplification-request-drivers-behind-hidden.md",
+      "state": "created",
       "section": "operations"
     },
     {
-      "fileName": "2026-02-21-services-daily-tip-rightsize-finops-foundation-pricing-and-rate-optimization-usage-.md",
-      "state": "unchanged",
+      "fileName": "2026-02-21-services-daily-tip-refactor-burst-capacity-overprovisioning-spend-with-architecture.md",
+      "state": "created",
       "section": "services"
     },
     {
-      "fileName": "2026-02-21-metrics-daily-tip-track-finops-foundation-kpi-guidance-to-catch-cloud-waste-early.md",
-      "state": "unchanged",
+      "fileName": "2026-02-21-metrics-daily-tip-measure-commitment-coverage-gap-with-thresholds-that-trigger-act.md",
+      "state": "created",
       "section": "metrics"
     },
     {
-      "fileName": "2026-02-22-operations-daily-tip-control-finops-foundation-operations-playbook-request-drivers-be.md",
-      "state": "unchanged",
+      "fileName": "2026-02-22-operations-daily-tip-control-crossregion-data-transfer-spikes-patterns-to-reduce-requ.md",
+      "state": "created",
       "section": "operations"
     },
     {
-      "fileName": "2026-02-22-services-daily-tip-rightsize-finops-foundation-pricing-and-rate-optimization-spend-.md",
-      "state": "unchanged",
+      "fileName": "2026-02-22-services-daily-tip-rightsize-storage-tiering-posture-usage-before-it-scales-your-bi.md",
+      "state": "created",
       "section": "services"
     },
     {
-      "fileName": "2026-02-22-metrics-daily-tip-measure-finops-foundation-kpi-guidance-and-route-ownership-befor.md",
-      "state": "unchanged",
+      "fileName": "2026-02-22-metrics-daily-tip-track-wasterate-trend-to-catch-cloud-waste-early.md",
+      "state": "created",
       "section": "metrics"
     },
     {
-      "fileName": "2026-02-23-operations-daily-tip-streamline-finops-foundation-operations-playbook-request-drivers.md",
-      "state": "unchanged",
+      "fileName": "2026-02-23-operations-daily-tip-diagnose-idle-request-amplification-patterns-to-reduce-request-c.md",
+      "state": "created",
       "section": "operations"
     },
     {
-      "fileName": "2026-02-23-services-daily-tip-refactor-finops-foundation-pricing-and-rate-optimization-consump.md",
-      "state": "unchanged",
+      "fileName": "2026-02-23-services-daily-tip-tune-managed-database-idle-headroom-spend-with-architecture-and-.md",
+      "state": "created",
       "section": "services"
     },
     {
-      "fileName": "2026-02-23-metrics-daily-tip-measure-finops-foundation-kpi-guidance-before-variance-turns-int.md",
-      "state": "unchanged",
+      "fileName": "2026-02-23-metrics-daily-tip-track-effective-savings-rate-with-thresholds-that-trigger-action.md",
+      "state": "created",
       "section": "metrics"
     },
     {
-      "fileName": "2026-02-24-operations-daily-tip-streamline-finops-foundation-operations-playbook-traffic-behavio.md",
-      "state": "unchanged",
+      "fileName": "2026-02-24-operations-daily-tip-understand-api-retry-volume-traffic-behavior-before-costs-compou.md",
+      "state": "created",
       "section": "operations"
     },
     {
-      "fileName": "2026-02-24-services-daily-tip-tune-finops-foundation-pricing-and-rate-optimization-spend-with-.md",
-      "state": "unchanged",
+      "fileName": "2026-02-24-services-daily-tip-refactor-managed-database-idle-headroom-consumption-shape-before.md",
+      "state": "created",
       "section": "services"
     },
     {
-      "fileName": "2026-02-24-metrics-daily-tip-watch-finops-foundation-kpi-guidance-before-variance-turns-into-.md",
-      "state": "unchanged",
+      "fileName": "2026-02-24-metrics-daily-tip-measure-commitment-coverage-gap-with-thresholds-that-trigger-act.md",
+      "state": "created",
       "section": "metrics"
     },
     {
-      "fileName": "2026-02-25-operations-daily-tip-understand-finops-foundation-operations-playbook-request-drivers.md",
-      "state": "unchanged",
+      "fileName": "2026-02-25-operations-daily-tip-diagnose-crossregion-data-transfer-spikes-request-drivers-behind.md",
+      "state": "created",
       "section": "operations"
     },
     {
-      "fileName": "2026-02-25-services-daily-tip-refactor-finops-foundation-pricing-and-rate-optimization-spend-w.md",
-      "state": "unchanged",
+      "fileName": "2026-02-25-services-daily-tip-refactor-burst-capacity-overprovisioning-consumption-shape-befor.md",
+      "state": "created",
       "section": "services"
     },
     {
-      "fileName": "2026-02-25-metrics-daily-tip-measure-finops-foundation-kpi-guidance-with-thresholds-that-trig.md",
-      "state": "unchanged",
+      "fileName": "2026-02-25-metrics-daily-tip-watch-unit-cost-per-transaction-before-variance-turns-into-overs.md",
+      "state": "created",
       "section": "metrics"
     },
     {
-      "fileName": "2026-02-26-operations-daily-tip-analyze-finops-foundation-operations-playbook-traffic-behavior-b.md",
-      "state": "unchanged",
+      "fileName": "2026-02-26-operations-daily-tip-control-batch-window-inefficiency-patterns-to-reduce-request-cos.md",
+      "state": "created",
       "section": "operations"
     },
     {
-      "fileName": "2026-02-26-services-daily-tip-rightsize-finops-foundation-pricing-and-rate-optimization-spend-.md",
-      "state": "unchanged",
+      "fileName": "2026-02-26-services-daily-tip-rightsize-managed-database-idle-headroom-spend-with-architecture.md",
+      "state": "created",
       "section": "services"
     },
     {
-      "fileName": "2026-02-26-metrics-daily-tip-measure-finops-foundation-kpi-guidance-before-variance-turns-int.md",
-      "state": "unchanged",
+      "fileName": "2026-02-26-metrics-daily-tip-watch-wasterate-trend-with-thresholds-that-trigger-action.md",
+      "state": "created",
       "section": "metrics"
     },
     {
-      "fileName": "2026-02-27-operations-daily-tip-understand-finops-foundation-operations-playbook-patterns-to-red.md",
-      "state": "unchanged",
+      "fileName": "2026-02-27-operations-daily-tip-analyze-idle-request-amplification-traffic-behavior-before-costs.md",
+      "state": "created",
       "section": "operations"
     },
     {
-      "fileName": "2026-02-27-services-daily-tip-optimize-finops-foundation-pricing-and-rate-optimization-service.md",
-      "state": "unchanged",
+      "fileName": "2026-02-27-services-daily-tip-rightsize-storage-tiering-posture-spend-with-architecture-and-co.md",
+      "state": "created",
       "section": "services"
     },
     {
-      "fileName": "2026-02-27-metrics-daily-tip-benchmark-finops-foundation-kpi-guidance-to-catch-cloud-waste-ea.md",
-      "state": "unchanged",
+      "fileName": "2026-02-27-metrics-daily-tip-measure-effective-savings-rate-to-catch-cloud-waste-early.md",
+      "state": "created",
       "section": "metrics"
     },
     {
-      "fileName": "2026-02-28-operations-daily-tip-analyze-finops-foundation-operations-playbook-traffic-behavior-b.md",
-      "state": "unchanged",
+      "fileName": "2026-02-28-operations-daily-tip-control-api-retry-volume-request-drivers-behind-hidden-cloud-spe.md",
+      "state": "created",
       "section": "operations"
     },
     {
-      "fileName": "2026-02-28-services-daily-tip-optimize-finops-foundation-pricing-and-rate-optimization-usage-b.md",
-      "state": "unchanged",
+      "fileName": "2026-02-28-services-daily-tip-rightsize-burst-capacity-overprovisioning-service-cost-posture-b.md",
+      "state": "created",
       "section": "services"
     },
     {
-      "fileName": "2026-02-28-metrics-daily-tip-measure-finops-foundation-kpi-guidance-to-catch-cloud-waste-earl.md",
-      "state": "unchanged",
+      "fileName": "2026-02-28-metrics-daily-tip-watch-effective-savings-rate-and-route-ownership-before-drift-co.md",
+      "state": "created",
       "section": "metrics"
     },
     {
-      "fileName": "2026-03-01-operations-daily-tip-streamline-finops-foundation-operations-playbook-patterns-to-red.md",
-      "state": "unchanged",
+      "fileName": "2026-03-01-operations-daily-tip-diagnose-idle-request-amplification-request-drivers-behind-hidde.md",
+      "state": "created",
       "section": "operations"
     },
     {
-      "fileName": "2026-03-01-services-daily-tip-tune-finops-foundation-pricing-and-rate-optimization-spend-with-.md",
-      "state": "unchanged",
+      "fileName": "2026-03-01-services-daily-tip-tune-storage-tiering-posture-spend-with-architecture-and-commitm.md",
+      "state": "created",
       "section": "services"
     },
     {
-      "fileName": "2026-03-01-metrics-daily-tip-monitor-finops-foundation-kpi-guidance-and-route-ownership-befor.md",
-      "state": "unchanged",
+      "fileName": "2026-03-01-metrics-daily-tip-watch-unit-cost-per-transaction-and-route-ownership-before-drift.md",
+      "state": "created",
       "section": "metrics"
     },
     {
-      "fileName": "2026-03-02-operations-daily-tip-streamline-finops-foundation-operations-playbook-request-drivers.md",
-      "state": "unchanged",
+      "fileName": "2026-03-02-operations-daily-tip-understand-api-retry-volume-request-drivers-behind-hidden-cloud-.md",
+      "state": "created",
       "section": "operations"
     },
     {
-      "fileName": "2026-03-02-services-daily-tip-refactor-finops-foundation-pricing-and-rate-optimization-usage-b.md",
-      "state": "unchanged",
+      "fileName": "2026-03-02-services-daily-tip-tune-savings-plan-utilization-usage-before-it-scales-your-bill.md",
+      "state": "created",
       "section": "services"
     },
     {
-      "fileName": "2026-03-02-metrics-daily-tip-measure-finops-foundation-kpi-guidance-with-thresholds-that-trig.md",
-      "state": "unchanged",
+      "fileName": "2026-03-02-metrics-daily-tip-measure-effective-savings-rate-to-catch-cloud-waste-early.md",
+      "state": "created",
       "section": "metrics"
     },
     {
-      "fileName": "2026-03-03-operations-daily-tip-control-finops-foundation-operations-playbook-patterns-to-reduce.md",
-      "state": "unchanged",
+      "fileName": "2026-03-03-operations-daily-tip-analyze-cache-hit-ratio-drift-waste-signals-before-they-hit-your.md",
+      "state": "created",
       "section": "operations"
     },
     {
-      "fileName": "2026-03-03-services-daily-tip-tune-finops-foundation-pricing-and-rate-optimization-consumption.md",
-      "state": "unchanged",
+      "fileName": "2026-03-03-services-daily-tip-rebalance-compute-rightsizing-coverage-consumption-shape-before-.md",
+      "state": "created",
       "section": "services"
     },
     {
-      "fileName": "2026-03-03-metrics-daily-tip-track-finops-foundation-kpi-guidance-and-route-ownership-before-.md",
-      "state": "unchanged",
+      "fileName": "2026-03-03-metrics-daily-tip-track-costperenvironment-variance-and-route-ownership-before-dri.md",
+      "state": "created",
       "section": "metrics"
     },
     {
-      "fileName": "2026-03-04-operations-daily-tip-streamline-finops-foundation-operations-playbook-traffic-behavio.md",
-      "state": "unchanged",
+      "fileName": "2026-03-04-operations-daily-tip-streamline-idle-request-amplification-traffic-behavior-before-co.md",
+      "state": "created",
       "section": "operations"
     },
     {
-      "fileName": "2026-03-04-services-daily-tip-refactor-finops-foundation-pricing-and-rate-optimization-spend-w.md",
-      "state": "unchanged",
+      "fileName": "2026-03-04-services-daily-tip-rebalance-managed-database-idle-headroom-spend-with-architecture.md",
+      "state": "created",
       "section": "services"
     },
     {
-      "fileName": "2026-03-04-metrics-daily-tip-benchmark-finops-foundation-kpi-guidance-and-route-ownership-bef.md",
-      "state": "unchanged",
+      "fileName": "2026-03-04-metrics-daily-tip-watch-costperenvironment-variance-and-route-ownership-before-dri.md",
+      "state": "created",
       "section": "metrics"
     },
     {
-      "fileName": "2026-03-05-operations-daily-tip-streamline-finops-foundation-operations-playbook-traffic-behavio.md",
-      "state": "unchanged",
+      "fileName": "2026-03-05-operations-daily-tip-streamline-api-retry-volume-traffic-behavior-before-costs-compou.md",
+      "state": "created",
       "section": "operations"
     },
     {
-      "fileName": "2026-03-05-services-daily-tip-rightsize-finops-foundation-pricing-and-rate-optimization-servic.md",
-      "state": "unchanged",
+      "fileName": "2026-03-05-services-daily-tip-rightsize-storage-tiering-posture-service-cost-posture-before-in.md",
+      "state": "created",
       "section": "services"
     },
     {
-      "fileName": "2026-03-05-metrics-daily-tip-measure-finops-foundation-kpi-guidance-and-route-ownership-befor.md",
-      "state": "unchanged",
+      "fileName": "2026-03-05-metrics-daily-tip-monitor-effective-savings-rate-before-variance-turns-into-oversp.md",
+      "state": "created",
       "section": "metrics"
     },
     {
-      "fileName": "2026-03-06-operations-daily-tip-diagnose-finops-foundation-operations-playbook-patterns-to-reduc.md",
-      "state": "unchanged",
+      "fileName": "2026-03-06-operations-daily-tip-analyze-batch-window-inefficiency-traffic-behavior-before-costs-.md",
+      "state": "created",
       "section": "operations"
     },
     {
-      "fileName": "2026-03-06-services-daily-tip-rebalance-finops-foundation-pricing-and-rate-optimization-spend-.md",
-      "state": "unchanged",
+      "fileName": "2026-03-06-services-daily-tip-tune-managed-database-idle-headroom-consumption-shape-before-mon.md",
+      "state": "created",
       "section": "services"
     },
     {
-      "fileName": "2026-03-06-metrics-daily-tip-measure-finops-foundation-kpi-guidance-and-route-ownership-befor.md",
-      "state": "unchanged",
+      "fileName": "2026-03-06-metrics-daily-tip-monitor-commitment-coverage-gap-before-variance-turns-into-overs.md",
+      "state": "created",
       "section": "metrics"
     },
     {
-      "fileName": "2026-03-07-operations-daily-tip-control-finops-foundation-operations-playbook-request-drivers-be.md",
-      "state": "unchanged",
+      "fileName": "2026-03-07-operations-daily-tip-analyze-crossregion-data-transfer-spikes-request-drivers-behind-.md",
+      "state": "created",
       "section": "operations"
     },
     {
-      "fileName": "2026-03-07-services-daily-tip-tune-finops-foundation-pricing-and-rate-optimization-usage-befor.md",
-      "state": "unchanged",
+      "fileName": "2026-03-07-services-daily-tip-rebalance-compute-rightsizing-coverage-service-cost-posture-befo.md",
+      "state": "created",
       "section": "services"
     },
     {
-      "fileName": "2026-03-07-metrics-daily-tip-watch-finops-foundation-kpi-guidance-before-variance-turns-into-.md",
-      "state": "unchanged",
+      "fileName": "2026-03-07-metrics-daily-tip-measure-costperenvironment-variance-to-catch-cloud-waste-early.md",
+      "state": "created",
       "section": "metrics"
     },
     {
-      "fileName": "2026-03-08-operations-daily-tip-understand-finops-foundation-operations-playbook-patterns-to-red.md",
-      "state": "unchanged",
+      "fileName": "2026-03-08-operations-daily-tip-analyze-batch-window-inefficiency-waste-signals-before-they-hit-.md",
+      "state": "created",
       "section": "operations"
     },
     {
-      "fileName": "2026-03-08-services-daily-tip-refactor-finops-foundation-pricing-and-rate-optimization-usage-b.md",
-      "state": "unchanged",
+      "fileName": "2026-03-08-services-daily-tip-tune-burst-capacity-overprovisioning-service-cost-posture-before.md",
+      "state": "created",
       "section": "services"
     },
     {
-      "fileName": "2026-03-08-metrics-daily-tip-measure-finops-foundation-kpi-guidance-with-thresholds-that-trig.md",
-      "state": "unchanged",
+      "fileName": "2026-03-08-metrics-daily-tip-measure-unit-cost-per-transaction-and-route-ownership-before-dri.md",
+      "state": "created",
       "section": "metrics"
     },
     {
-      "fileName": "2026-03-09-operations-daily-tip-analyze-finops-foundation-operations-playbook-waste-signals-befo.md",
-      "state": "unchanged",
+      "fileName": "2026-03-09-operations-daily-tip-understand-cache-hit-ratio-drift-waste-signals-before-they-hit-y.md",
+      "state": "created",
       "section": "operations"
     },
     {
-      "fileName": "2026-03-09-services-daily-tip-optimize-finops-foundation-pricing-and-rate-optimization-service.md",
-      "state": "unchanged",
+      "fileName": "2026-03-09-services-daily-tip-refactor-burst-capacity-overprovisioning-spend-with-architecture.md",
+      "state": "created",
       "section": "services"
     },
     {
-      "fileName": "2026-03-09-metrics-daily-tip-monitor-finops-foundation-kpi-guidance-and-route-ownership-befor.md",
-      "state": "unchanged",
+      "fileName": "2026-03-09-metrics-daily-tip-monitor-commitment-coverage-gap-and-route-ownership-before-drift.md",
+      "state": "created",
       "section": "metrics"
     },
     {
-      "fileName": "2026-03-10-operations-daily-tip-analyze-finops-foundation-operations-playbook-patterns-to-reduce.md",
-      "state": "unchanged",
+      "fileName": "2026-03-10-operations-daily-tip-diagnose-batch-window-inefficiency-traffic-behavior-before-costs.md",
+      "state": "created",
       "section": "operations"
     },
     {
-      "fileName": "2026-03-10-services-daily-tip-rightsize-finops-foundation-pricing-and-rate-optimization-usage-.md",
-      "state": "unchanged",
+      "fileName": "2026-03-10-services-daily-tip-rebalance-burst-capacity-overprovisioning-usage-before-it-scales.md",
+      "state": "created",
       "section": "services"
     },
     {
-      "fileName": "2026-03-10-metrics-daily-tip-benchmark-finops-foundation-kpi-guidance-to-catch-cloud-waste-ea.md",
-      "state": "unchanged",
+      "fileName": "2026-03-10-metrics-daily-tip-benchmark-commitment-coverage-gap-with-thresholds-that-trigger-a.md",
+      "state": "created",
       "section": "metrics"
     },
     {
-      "fileName": "2026-03-11-operations-daily-tip-streamline-finops-foundation-operations-playbook-traffic-behavio.md",
-      "state": "unchanged",
+      "fileName": "2026-03-11-operations-daily-tip-control-crossregion-data-transfer-spikes-request-drivers-behind-.md",
+      "state": "created",
       "section": "operations"
     },
     {
-      "fileName": "2026-03-11-services-daily-tip-refactor-finops-foundation-pricing-and-rate-optimization-spend-w.md",
-      "state": "unchanged",
+      "fileName": "2026-03-11-services-daily-tip-rebalance-compute-rightsizing-coverage-spend-with-architecture-a.md",
+      "state": "created",
       "section": "services"
     },
     {
-      "fileName": "2026-03-11-metrics-daily-tip-monitor-finops-foundation-kpi-guidance-with-thresholds-that-trig.md",
-      "state": "unchanged",
+      "fileName": "2026-03-11-metrics-daily-tip-track-effective-savings-rate-to-catch-cloud-waste-early.md",
+      "state": "created",
       "section": "metrics"
     },
     {
-      "fileName": "2026-03-12-operations-daily-tip-understand-finops-foundation-operations-playbook-traffic-behavio.md",
-      "state": "unchanged",
+      "fileName": "2026-03-12-operations-daily-tip-diagnose-crossregion-data-transfer-spikes-traffic-behavior-befor.md",
+      "state": "created",
       "section": "operations"
     },
     {
-      "fileName": "2026-03-12-services-daily-tip-optimize-finops-foundation-pricing-and-rate-optimization-spend-w.md",
-      "state": "unchanged",
+      "fileName": "2026-03-12-services-daily-tip-rightsize-burst-capacity-overprovisioning-spend-with-architectur.md",
+      "state": "created",
       "section": "services"
     },
     {
-      "fileName": "2026-03-12-metrics-daily-tip-watch-finops-foundation-kpi-guidance-and-route-ownership-before-.md",
-      "state": "unchanged",
+      "fileName": "2026-03-12-metrics-daily-tip-track-unit-cost-per-transaction-and-route-ownership-before-drift.md",
+      "state": "created",
       "section": "metrics"
     },
     {
-      "fileName": "2026-03-13-operations-daily-tip-understand-finops-foundation-operations-playbook-traffic-behavio.md",
-      "state": "unchanged",
+      "fileName": "2026-03-13-operations-daily-tip-streamline-cache-hit-ratio-drift-request-drivers-behind-hidden-c.md",
+      "state": "created",
       "section": "operations"
     },
     {
-      "fileName": "2026-03-13-services-daily-tip-tune-finops-foundation-pricing-and-rate-optimization-service-cos.md",
-      "state": "unchanged",
+      "fileName": "2026-03-13-services-daily-tip-optimize-storage-tiering-posture-consumption-shape-before-monthe.md",
+      "state": "created",
       "section": "services"
     },
     {
-      "fileName": "2026-03-13-metrics-daily-tip-track-finops-foundation-kpi-guidance-with-thresholds-that-trigge.md",
-      "state": "unchanged",
+      "fileName": "2026-03-13-metrics-daily-tip-watch-costperenvironment-variance-to-catch-cloud-waste-early.md",
+      "state": "created",
       "section": "metrics"
     },
     {
-      "fileName": "2026-03-14-operations-daily-tip-streamline-finops-foundation-operations-playbook-traffic-behavio.md",
-      "state": "unchanged",
+      "fileName": "2026-03-14-operations-daily-tip-control-crossregion-data-transfer-spikes-traffic-behavior-before.md",
+      "state": "created",
       "section": "operations"
     },
     {
-      "fileName": "2026-03-14-services-daily-tip-rightsize-finops-foundation-pricing-and-rate-optimization-consum.md",
-      "state": "unchanged",
+      "fileName": "2026-03-14-services-daily-tip-refactor-burst-capacity-overprovisioning-service-cost-posture-be.md",
+      "state": "created",
       "section": "services"
     },
     {
-      "fileName": "2026-03-14-metrics-daily-tip-measure-finops-foundation-kpi-guidance-before-variance-turns-int.md",
-      "state": "unchanged",
+      "fileName": "2026-03-14-metrics-daily-tip-benchmark-unit-cost-per-transaction-with-thresholds-that-trigger.md",
+      "state": "created",
       "section": "metrics"
     },
     {
-      "fileName": "2026-03-15-operations-daily-tip-diagnose-finops-foundation-operations-playbook-patterns-to-reduc.md",
-      "state": "unchanged",
+      "fileName": "2026-03-15-operations-daily-tip-streamline-batch-window-inefficiency-traffic-behavior-before-cos.md",
+      "state": "created",
       "section": "operations"
     },
     {
-      "fileName": "2026-03-15-services-daily-tip-rightsize-finops-foundation-pricing-and-rate-optimization-usage-.md",
-      "state": "unchanged",
+      "fileName": "2026-03-15-services-daily-tip-rebalance-compute-rightsizing-coverage-spend-with-architecture-a.md",
+      "state": "created",
       "section": "services"
     },
     {
-      "fileName": "2026-03-15-metrics-daily-tip-monitor-finops-foundation-kpi-guidance-with-thresholds-that-trig.md",
-      "state": "unchanged",
+      "fileName": "2026-03-15-metrics-daily-tip-track-wasterate-trend-with-thresholds-that-trigger-action.md",
+      "state": "created",
       "section": "metrics"
     },
     {
-      "fileName": "2026-03-16-operations-daily-tip-streamline-finops-foundation-operations-playbook-waste-signals-b.md",
-      "state": "unchanged",
+      "fileName": "2026-03-16-operations-daily-tip-streamline-batch-window-inefficiency-traffic-behavior-before-cos.md",
+      "state": "created",
       "section": "operations"
     },
     {
-      "fileName": "2026-03-16-services-daily-tip-refactor-finops-foundation-pricing-and-rate-optimization-consump.md",
-      "state": "unchanged",
+      "fileName": "2026-03-16-services-daily-tip-optimize-compute-rightsizing-coverage-usage-before-it-scales-you.md",
+      "state": "created",
       "section": "services"
     },
     {
-      "fileName": "2026-03-16-metrics-daily-tip-monitor-finops-foundation-kpi-guidance-before-variance-turns-int.md",
-      "state": "unchanged",
+      "fileName": "2026-03-16-metrics-daily-tip-measure-effective-savings-rate-with-thresholds-that-trigger-acti.md",
+      "state": "created",
       "section": "metrics"
     },
     {
-      "fileName": "2026-03-17-operations-daily-tip-control-finops-foundation-operations-playbook-waste-signals-befo.md",
-      "state": "unchanged",
+      "fileName": "2026-03-17-operations-daily-tip-streamline-crossregion-data-transfer-spikes-waste-signals-before.md",
+      "state": "created",
       "section": "operations"
     },
     {
-      "fileName": "2026-03-17-services-daily-tip-rebalance-finops-foundation-pricing-and-rate-optimization-servic.md",
-      "state": "unchanged",
+      "fileName": "2026-03-17-services-daily-tip-rebalance-storage-tiering-posture-consumption-shape-before-month.md",
+      "state": "created",
       "section": "services"
     },
     {
-      "fileName": "2026-03-17-metrics-daily-tip-benchmark-finops-foundation-kpi-guidance-to-catch-cloud-waste-ea.md",
-      "state": "unchanged",
+      "fileName": "2026-03-17-metrics-daily-tip-benchmark-commitment-coverage-gap-to-catch-cloud-waste-early.md",
+      "state": "created",
       "section": "metrics"
     },
     {
-      "fileName": "2026-03-18-operations-daily-tip-understand-finops-foundation-operations-playbook-patterns-to-red.md",
-      "state": "unchanged",
+      "fileName": "2026-03-18-operations-daily-tip-understand-cache-hit-ratio-drift-waste-signals-before-they-hit-y.md",
+      "state": "created",
       "section": "operations"
     },
     {
-      "fileName": "2026-03-18-services-daily-tip-rightsize-finops-foundation-pricing-and-rate-optimization-usage-.md",
-      "state": "unchanged",
+      "fileName": "2026-03-18-services-daily-tip-rebalance-managed-database-idle-headroom-spend-with-architecture.md",
+      "state": "created",
       "section": "services"
     },
     {
-      "fileName": "2026-03-18-metrics-daily-tip-monitor-finops-foundation-kpi-guidance-and-route-ownership-befor.md",
-      "state": "unchanged",
+      "fileName": "2026-03-18-metrics-daily-tip-measure-unit-cost-per-transaction-to-catch-cloud-waste-early.md",
+      "state": "created",
       "section": "metrics"
     }
   ]

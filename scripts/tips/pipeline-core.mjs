@@ -175,6 +175,30 @@ const FALLBACK_SOURCE_BY_SECTION = {
   },
 };
 
+const FALLBACK_FOCUS_BY_SECTION = {
+  operations: [
+    "API retry volume",
+    "cache hit ratio drift",
+    "idle request amplification",
+    "cross-region data transfer spikes",
+    "batch window inefficiency",
+  ],
+  services: [
+    "compute rightsizing coverage",
+    "savings plan utilization",
+    "storage tiering posture",
+    "burst capacity overprovisioning",
+    "managed database idle headroom",
+  ],
+  metrics: [
+    "unit cost per transaction",
+    "waste-rate trend",
+    "commitment coverage gap",
+    "cost-per-environment variance",
+    "effective savings rate",
+  ],
+};
+
 function normalizeSpace(input) {
   return String(input || "").replace(/\s+/g, " ").trim();
 }
@@ -300,9 +324,12 @@ function hasNumericSpecificity(text) {
 function buildTemplateTip(section, source, isoDate) {
   const template = SECTION_TEMPLATES[section];
   const base = source ?? FALLBACK_SOURCE_BY_SECTION[section];
+  const fallbackFocus =
+    pickDeterministicVariant(`${isoDate}:${section}:fallbackFocus`, FALLBACK_FOCUS_BY_SECTION[section]) ||
+    "cloud cost signal";
   const safeSource = {
     ...base,
-    focus: cleanSourceTitle(base.title),
+    focus: source ? cleanSourceTitle(base.title) : fallbackFocus,
   };
   const language = buildSectionLanguage(section, safeSource, isoDate);
   const body = template.buildBody(safeSource, language);

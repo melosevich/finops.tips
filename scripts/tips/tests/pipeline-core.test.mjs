@@ -105,3 +105,17 @@ test("does not duplicate directive verbs in generated title focus", () => {
   assert.equal(firstTwoWords.length, 2);
   assert.notEqual(firstTwoWords[0], firstTwoWords[1]);
 });
+
+test("fallback-generated titles use concrete focus terms", () => {
+  const { valid } = generateSectionTips({
+    now: new Date("2026-03-19T00:00:00Z"),
+    sources: [],
+    history: [],
+  });
+
+  assert.equal(valid.length, SECTIONS.length);
+  for (const tip of valid) {
+    assert.ok(!/finops foundation/i.test(tip.title), tip.title);
+    assert.ok(!/finops foundation/i.test(tip.description), tip.description);
+  }
+});
