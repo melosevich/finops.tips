@@ -252,7 +252,7 @@ function main() {
 
   const sourceUniverse = allPosts.filter((post) => {
     const section = SECTIONS.find((candidate) => post.tags.includes(candidate));
-    return Boolean(section && post.title && post.description);
+    return Boolean(section && post.title && post.description && !post.generated);
   });
 
   const valid = [];
