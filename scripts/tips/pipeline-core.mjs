@@ -43,19 +43,67 @@ const CLOUD_KEYWORDS = [
   "eks",
 ];
 
+const SECTION_LANGUAGE_OPTIONS = {
+  operations: {
+    titleLead: ["Understand", "Analyze", "Diagnose", "Control", "Streamline"],
+    titleTail: [
+      "patterns to reduce request costs",
+      "traffic behavior before costs compound",
+      "waste signals before they hit your invoice",
+      "request drivers behind hidden cloud spend",
+    ],
+    summaryLead: ["Use", "Map", "Baseline", "Correlate", "Quantify"],
+    whyLead: [
+      "Request-heavy paths can drive large spend even when unit prices look small.",
+      "High-frequency operational behavior can quietly amplify cloud costs.",
+      "Small per-request charges compound quickly at scale when traffic is noisy.",
+    ],
+  },
+  services: {
+    titleLead: ["Optimize", "Right-size", "Tune", "Refactor", "Rebalance"],
+    titleTail: [
+      "usage before it scales your bill",
+      "consumption shape before month-end surprises",
+      "spend with architecture and commitment alignment",
+      "service cost posture before inefficiency compounds",
+    ],
+    summaryLead: ["Translate", "Turn", "Convert", "Use", "Pair"],
+    whyLead: [
+      "Service spend compounds quickly as traffic grows.",
+      "Single-track optimization tends to stall savings over time.",
+      "Uncoordinated pricing and architecture decisions increase waste risk.",
+    ],
+  },
+  metrics: {
+    titleLead: ["Track", "Monitor", "Measure", "Benchmark", "Watch"],
+    titleTail: [
+      "to catch cloud waste early",
+      "with thresholds that trigger action",
+      "before variance turns into overspend",
+      "and route ownership before drift compounds",
+    ],
+    summaryLead: ["Set", "Instrument", "Operationalize", "Deploy", "Enforce"],
+    whyLead: [
+      "Without threshold ownership, teams discover cost drift too late.",
+      "Weak metric governance delays remediation and increases noise.",
+      "Metrics without explicit owners rarely prevent repeat overspend.",
+    ],
+  },
+};
+
 const SECTION_TEMPLATES = {
   operations: {
     prompt: "Generate one concrete cloud operations cost tip with an immediate runbook action.",
-    buildTitle: (source) => `Understand ${source.focus} patterns to reduce request costs`,
-    buildSummary: (source) =>
-      `Use ${source.focus} request telemetry and per-call cost baselines to remove high-volume waste before month-end close.`,
-    buildBody: (source) =>
+    buildTitle: (source, language) => `${language.titleLead} ${source.focus} ${language.titleTail}`,
+    buildSummary: (source, language) =>
+      `${language.summaryLead} ${source.focus} request telemetry and per-call cost baselines to remove high-volume waste before month-end close.`,
+    buildBody: (source, language) =>
       [
         "## What It Is",
         `${source.focus} is an API-level spend driver. It can be modeled as \`total_cost = requests * unit_request_price + related_transfer + downstream_compute\` and broken down by workload, endpoint, and environment.`,
         "",
         "## Why It Matters",
-        "Small per-request prices hide large aggregate spend at scale. A single noisy integration can multiply request, transfer, and retry costs, then cascade into Lambda/DB invocations.",
+        `${language.whyLead} A single noisy integration can multiply request, transfer, and retry costs, then cascade into Lambda/DB invocations.`,
         "",
         "## How to Act",
         "1. Query 14 days of CUR and API logs, grouped by operation, caller, and status code; compute p50/p95 requests per minute.",
@@ -68,16 +116,16 @@ const SECTION_TEMPLATES = {
   },
   services: {
     prompt: "Generate one service-level optimization tip with a direct procurement or architecture action.",
-    buildTitle: (source) => `Optimize ${source.focus} usage before it scales your bill`,
-    buildSummary: (source) =>
-      `Turn ${source.focus} usage shape into a concrete architecture plus commitment strategy with expected savings.`,
-    buildBody: (source) =>
+    buildTitle: (source, language) => `${language.titleLead} ${source.focus} ${language.titleTail}`,
+    buildSummary: (source, language) =>
+      `${language.summaryLead} ${source.focus} usage shape into a concrete architecture plus commitment strategy with expected savings.`,
+    buildBody: (source, language) =>
       [
         "## What It Is",
         `${source.focus} spend is governed by three levers: utilization profile, pricing model (on-demand vs commitment), and architecture efficiency (duration, memory/compute, and data movement).`,
         "",
         "## Why It Matters",
-        "If you tune only one lever, savings plateau quickly. Durable FinOps gains come from combining engineering changes with the right commercial commitment.",
+        `${language.whyLead} Durable FinOps gains come from combining engineering changes with the right commercial commitment.`,
         "",
         "## How to Act",
         "1. Rank the top SKUs/usage types for this service and quantify each as % of monthly service spend.",
@@ -90,16 +138,16 @@ const SECTION_TEMPLATES = {
   },
   metrics: {
     prompt: "Generate one KPI-oriented FinOps tip with a measurable threshold and owner handoff.",
-    buildTitle: (source) => `Track ${source.focus} to catch cloud waste early`,
-    buildSummary: (source) =>
-      `Instrument ${source.focus} with owner-level thresholds, confidence bands, and an explicit remediation SLA.`,
-    buildBody: (source) =>
+    buildTitle: (source, language) => `${language.titleLead} ${source.focus} ${language.titleTail}`,
+    buildSummary: (source, language) =>
+      `${language.summaryLead} ${source.focus} with owner-level thresholds, confidence bands, and an explicit remediation SLA.`,
+    buildBody: (source, language) =>
       [
         "## What It Is",
         `${source.focus} is a leading FinOps KPI that should be tracked by workload and environment, not only at global account level, to expose where inefficiency actually originates.`,
         "",
         "## Why It Matters",
-        "Without statistically meaningful guardrails, teams either overreact to noise or detect cost drift too late. Thresholds plus ownership reduce both false positives and delayed remediation.",
+        `${language.whyLead} Thresholds plus ownership reduce both false positives and delayed remediation.`,
         "",
         "## How to Act",
         "1. Define target, warning, and critical bands (for example using a 4-week rolling baseline plus variance tolerance).",
@@ -145,16 +193,76 @@ function slugify(input) {
 }
 
 function cleanSourceTitle(input) {
-  const normalized = normalizeSpace(input)
-    .replace(/^(runbook focus|service optimization|metric to watch|operation|service|metric)\s*:\s*/i, "")
+  const directivePrefixes = [
+    "runbook focus",
+    "service optimization",
+    "metric to watch",
+    "operation",
+    "service",
+    "metric",
+    "understand",
+    "analyze",
+    "diagnose",
+    "control",
+    "streamline",
+    "optimize",
+    "right-size",
+    "tune",
+    "refactor",
+    "rebalance",
+    "track",
+    "monitor",
+    "measure",
+    "benchmark",
+    "watch",
+    "set",
+    "instrument",
+    "operationalize",
+    "deploy",
+    "enforce",
+    "translate",
+    "turn",
+    "convert",
+    "use",
+    "pair",
+    "map",
+    "baseline",
+    "correlate",
+    "quantify",
+  ];
+  const prefixPattern = new RegExp(`^(?:${directivePrefixes.join("|")})\\s*:?\\s+`, "i");
+
+  let normalized = normalizeSpace(input)
     .replace(/\(([^)]+)\)/g, " $1")
     .replace(/\s+/g, " ")
     .trim();
+  while (prefixPattern.test(normalized)) {
+    normalized = normalized.replace(prefixPattern, "").trim();
+  }
   return normalized || "cloud cost signal";
 }
 
 function sha1(input) {
   return crypto.createHash("sha1").update(input).digest("hex");
+}
+
+function pickDeterministicVariant(seed, options) {
+  if (!Array.isArray(options) || options.length === 0) return "";
+  const hash = sha1(seed);
+  const numeric = Number.parseInt(hash.slice(0, 8), 16);
+  return options[numeric % options.length];
+}
+
+function buildSectionLanguage(section, source, isoDate) {
+  const options = SECTION_LANGUAGE_OPTIONS[section] || {};
+  return {
+    titleLead: pickDeterministicVariant(`${isoDate}:${section}:${source.focus}:titleLead`, options.titleLead) || "Understand",
+    titleTail:
+      pickDeterministicVariant(`${isoDate}:${section}:${source.focus}:titleTail`, options.titleTail) ||
+      "patterns to reduce costs",
+    summaryLead: pickDeterministicVariant(`${isoDate}:${section}:${source.focus}:summaryLead`, options.summaryLead) || "Use",
+    whyLead: pickDeterministicVariant(`${isoDate}:${section}:${source.focus}:whyLead`, options.whyLead) || "",
+  };
 }
 
 function tokenize(input) {
@@ -196,12 +304,13 @@ function buildTemplateTip(section, source, isoDate) {
     ...base,
     focus: cleanSourceTitle(base.title),
   };
-  const body = template.buildBody(safeSource);
+  const language = buildSectionLanguage(section, safeSource, isoDate);
+  const body = template.buildBody(safeSource, language);
   return {
     section,
     templatePrompt: template.prompt,
-    title: template.buildTitle(safeSource),
-    description: template.buildSummary(safeSource),
+    title: template.buildTitle(safeSource, language),
+    description: template.buildSummary(safeSource, language),
     body,
     sourceTitle: safeSource.title,
     sourceUrl: safeSource.url,
