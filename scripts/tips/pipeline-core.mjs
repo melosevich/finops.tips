@@ -193,11 +193,52 @@ function slugify(input) {
 }
 
 function cleanSourceTitle(input) {
-  const normalized = normalizeSpace(input)
-    .replace(/^(runbook focus|service optimization|metric to watch|operation|service|metric)\s*:\s*/i, "")
+  const directivePrefixes = [
+    "runbook focus",
+    "service optimization",
+    "metric to watch",
+    "operation",
+    "service",
+    "metric",
+    "understand",
+    "analyze",
+    "diagnose",
+    "control",
+    "streamline",
+    "optimize",
+    "right-size",
+    "tune",
+    "refactor",
+    "rebalance",
+    "track",
+    "monitor",
+    "measure",
+    "benchmark",
+    "watch",
+    "set",
+    "instrument",
+    "operationalize",
+    "deploy",
+    "enforce",
+    "translate",
+    "turn",
+    "convert",
+    "use",
+    "pair",
+    "map",
+    "baseline",
+    "correlate",
+    "quantify",
+  ];
+  const prefixPattern = new RegExp(`^(?:${directivePrefixes.join("|")})\\s*:?\\s+`, "i");
+
+  let normalized = normalizeSpace(input)
     .replace(/\(([^)]+)\)/g, " $1")
     .replace(/\s+/g, " ")
     .trim();
+  while (prefixPattern.test(normalized)) {
+    normalized = normalized.replace(prefixPattern, "").trim();
+  }
   return normalized || "cloud cost signal";
 }
 

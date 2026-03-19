@@ -63,3 +63,45 @@ test("blocks near-duplicate tips", () => {
   assert.ok(result.score >= 0.7);
 });
 
+test("does not duplicate directive verbs in generated title focus", () => {
+  const { valid } = generateSectionTips({
+    now: new Date("2026-03-19T00:00:00Z"),
+    sources: [
+      {
+        title: "Understand GetObject S3 request path",
+        url: "https://example.com/getobject",
+        slug: "getobject-source",
+        pubDate: "2026-03-10",
+        tags: ["operations"],
+        body: "GetObject request analysis",
+      },
+      {
+        title: "Optimize EC2 commitments",
+        url: "https://example.com/ec2",
+        slug: "ec2-source",
+        pubDate: "2026-03-10",
+        tags: ["services"],
+        body: "EC2 commitments",
+      },
+      {
+        title: "Track unit cost by product",
+        url: "https://example.com/unit-cost",
+        slug: "unit-cost-source",
+        pubDate: "2026-03-10",
+        tags: ["metrics"],
+        body: "Unit cost trend",
+      },
+    ],
+    history: [],
+  });
+  const operationsTip = valid.find((tip) => tip.section === "operations");
+  assert.ok(operationsTip);
+
+  const firstTwoWords = operationsTip.title
+    .trim()
+    .split(/\s+/)
+    .slice(0, 2)
+    .map((word) => word.toLowerCase());
+  assert.equal(firstTwoWords.length, 2);
+  assert.notEqual(firstTwoWords[0], firstTwoWords[1]);
+});
