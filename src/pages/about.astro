@@ -4,12 +4,75 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
 
 <BaseLayout title="About">
   <section class="py-16">
-    <div class="max-w-2xl mx-auto px-4">
+    <div class="max-w-3xl mx-auto px-4">
       <h1 class="text-3xl font-semibold tracking-tight">FinOps Tips</h1>
       <p class="mt-4 text-muted-foreground">
         Daily, bite-sized FinOps wisdom: operations, services, and metrics — with
         practical examples.
       </p>
+
+      <div class="mt-10 space-y-8">
+        <section>
+          <h2 class="text-2xl font-semibold tracking-tight">Architecture</h2>
+          <p class="mt-3 text-muted-foreground">
+            finops.tips is a static-first Astro site that keeps content, build
+            logic, and presentation loosely coupled. The goal is simple:
+            publish frequent tips fast, keep pages fast, and make each layer
+            easy to evolve independently.
+          </p>
+        </section>
+
+        <section>
+          <h3 class="text-xl font-semibold tracking-tight">1) Content Layer</h3>
+          <p class="mt-3 text-muted-foreground">
+            Tips are the source of truth. They are organized by category
+            (Operations, Services, Metrics), then surfaced in curated lists and
+            archive pages. This keeps publishing lightweight while preserving a
+            predictable structure for readers and automation.
+          </p>
+        </section>
+
+        <section>
+          <h3 class="text-xl font-semibold tracking-tight">2) Application Layer</h3>
+          <p class="mt-3 text-muted-foreground">
+            Astro pages compose reusable layout and section components.
+            `BaseLayout` handles global framing (navigation, footer, theme
+            controls), while route-specific pages only focus on page intent.
+            This separation avoids duplicated UI logic and makes new pages quick
+            to ship.
+          </p>
+        </section>
+
+        <section>
+          <h3 class="text-xl font-semibold tracking-tight">3) Automation Layer</h3>
+          <p class="mt-3 text-muted-foreground">
+            Content operations run through scripts and scheduling so updates can
+            be generated, reviewed, and published consistently. The automation
+            flow is designed so humans can intervene at any point, with no
+            hidden state in runtime servers.
+          </p>
+        </section>
+
+        <section>
+          <h3 class="text-xl font-semibold tracking-tight">4) Delivery Layer</h3>
+          <p class="mt-3 text-muted-foreground">
+            Builds produce static assets and feeds (including RSS), then deploy
+            via CI/CD. Because pages are pre-rendered, infrastructure stays
+            simple: no always-on app server is required for core content
+            delivery, which keeps cost and operational risk low.
+          </p>
+        </section>
+
+        <section>
+          <h3 class="text-xl font-semibold tracking-tight">Design Principles</h3>
+          <ul class="mt-3 list-disc pl-6 text-muted-foreground space-y-2">
+            <li>Static-first delivery for performance and reliability.</li>
+            <li>Composable components for maintainability.</li>
+            <li>Scriptable publishing workflows for repeatability.</li>
+            <li>Low-ops infrastructure to align with FinOps goals.</li>
+          </ul>
+        </section>
+      </div>
     </div>
   </section>
 </BaseLayout>
