@@ -2,7 +2,7 @@
 pubDate: 2026-03-26
 team: "gonzalo-melosevich"
 title: "Microsoft Data & Agentic AI Forum"
-description: "Microsoft Events event"
+description: ""
 image:
   url: "/src/images/events/official/microsoft.png"
   alt: "Microsoft Events"
