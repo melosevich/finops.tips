@@ -286,8 +286,8 @@ function main() {
       sources: scopedSources,
       history: historyForRun,
       recentSourceSlugsBySection,
-      // Backfills should materialize one tip per section/day even if phrasing is similar.
-      duplicateThreshold: days > 1 ? 1.01 : 0.72,
+      // Always materialize one tip per section/day; language variation handles repetition.
+      duplicateThreshold: 1.01,
     });
 
     for (const tip of runResult.valid) {
