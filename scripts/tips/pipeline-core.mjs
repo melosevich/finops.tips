@@ -199,6 +199,96 @@ const FALLBACK_FOCUS_BY_SECTION = {
   ],
 };
 
+const BODY_STRATEGIES = {
+  operations: [
+    {
+      steps: [
+        "1. Query 14 days of CUR and API logs, grouped by operation, caller, and status code; compute p50/p95 requests per minute.",
+        "2. Build a cost-per-1k-requests baseline for each workload and flag callers with >20% week-over-week drift not explained by traffic.",
+        "3. For top offenders, enforce one control: response caching, retry budget (max attempts), or request batching, then verify 48-hour impact.",
+      ],
+      example: (focus, source) =>
+        `If ${focus} from one service rises from 42M to 56M calls/week (+33%) while business KPIs stay flat, cap retries to 2, add a 300s cache TTL for idempotent reads, and target a 15-25% request-cost reduction in the next billing window. Source: [${source.title}](${source.url}).`,
+    },
+    {
+      steps: [
+        "1. Build a caller-to-endpoint heatmap for the past 10 business days and isolate the top three cost-contributing request paths.",
+        "2. For each path, estimate avoidable spend by simulating lower retry rates, stronger cache eligibility, or fewer redundant calls.",
+        "3. Ship one runbook change per path and track whether request-related cost drops at least 10% by the next weekly review.",
+      ],
+      example: (focus, source) =>
+        `If ${focus} spend concentrates in three integration flows, reduce retries on non-critical errors, cache repeat reads for five minutes, and suppress duplicate polling loops to cut request spend within one billing cycle. Source: [${source.title}](${source.url}).`,
+    },
+    {
+      steps: [
+        "1. Define an SLO-style cost guardrail for request intensity (for example, max requests per business transaction).",
+        "2. Add ownership tags to high-volume callers and alert when request intensity exceeds baseline by more than one standard deviation.",
+        "3. Require remediation tickets with due dates for outliers and track closure impact in weekly FinOps ops review.",
+      ],
+      example: (focus, source) =>
+        `If ${focus} request intensity jumps after a release, gate rollout, assign the owning team, and enforce a rollback or optimization plan before traffic returns to full volume. Source: [${source.title}](${source.url}).`,
+    },
+  ],
+  services: [
+    {
+      steps: [
+        "1. Rank the top SKUs/usage types for this service and quantify each as % of monthly service spend.",
+        "2. Segment workload into steady baseline vs burst usage; map baseline to RI/Savings Plan coverage target and leave burst on on-demand.",
+        "3. Execute one engineering optimization with measured ROI (for example, reduce runtime or over-provisioning) and track realized savings against forecast.",
+      ],
+      example: (focus, source) =>
+        `If ${focus} is 30% above plan and 70% of usage is stable, target 60-70% commitment coverage for the stable slice and reduce peak-unit consumption by 10-15% via architecture tuning; validate savings in CUR within 7 days. Source: [${source.title}](${source.url}).`,
+    },
+    {
+      steps: [
+        "1. Break service cost into utilization, commitment, and architecture components and quantify variance against last month.",
+        "2. Choose one procurement move (coverage adjustment) and one engineering move (efficiency reduction) that can be shipped this sprint.",
+        "3. Validate realized savings with before/after unit economics and retire changes that fail to beat forecast.",
+      ],
+      example: (focus, source) =>
+        `If ${focus} shows rising idle headroom and weak commitment utilization, tighten autoscaling floors, rebalance commitments, and remove underused capacity pools to recover margin without service risk. Source: [${source.title}](${source.url}).`,
+    },
+    {
+      steps: [
+        "1. Establish a monthly service spend budget split by environment (prod/stage/dev) and owner.",
+        "2. Flag the highest cost-per-throughput workload and run a design review focused on data transfer, storage tiering, and compute mix.",
+        "3. Track corrective actions as explicit budget deltas and close only when actual billed savings are observed.",
+      ],
+      example: (focus, source) =>
+        `If ${focus} in non-production exceeds its budget envelope, apply schedule-based shutdown, lower retention/tiering defaults, and require owner approval for exceptional spend bursts. Source: [${source.title}](${source.url}).`,
+    },
+  ],
+  metrics: [
+    {
+      steps: [
+        "1. Define target, warning, and critical bands (for example using a 4-week rolling baseline plus variance tolerance).",
+        "2. Slice the metric by owner dimension (team, product, environment) and attach one accountable engineer per slice.",
+        "3. Trigger an incident-style remediation when critical threshold breaches persist >7 days, with expected savings and due date.",
+      ],
+      example: (focus, source) =>
+        `If ${focus} rises from 8% to 13% for two consecutive weeks in one product line, open a remediation ticket with a 14-day SLA, require a quantified rollback/optimization plan, and track whether waste returns below 9% by next review. Source: [${source.title}](${source.url}).`,
+    },
+    {
+      steps: [
+        "1. Pair each KPI with a business denominator (users, transactions, or workload units) so trend moves are interpretable.",
+        "2. Publish weekly scorecards by team with explicit owner notes for any warning/critical movement.",
+        "3. Enforce a remediation gate: no metric can remain critical for two consecutive reporting cycles without CTO/FinOps escalation.",
+      ],
+      example: (focus, source) =>
+        `If ${focus} worsens while traffic is flat, require each owner to document one corrective action and expected impact, then verify improvement in the next scorecard cycle. Source: [${source.title}](${source.url}).`,
+    },
+    {
+      steps: [
+        "1. Model expected KPI variance bands using seasonality (weekday/weekend or release cadence) rather than static thresholds.",
+        "2. Route anomalies to the directly responsible team channel with a prefilled runbook and target response time.",
+        "3. Audit false-positive and missed-alert rates monthly, then tune thresholds to improve signal quality.",
+      ],
+      example: (focus, source) =>
+        `If ${focus} crosses critical bounds after a release train, correlate with deployment metadata, isolate regressions by service, and revert or optimize until the metric re-enters the expected band. Source: [${source.title}](${source.url}).`,
+    },
+  ],
+};
+
 function normalizeSpace(input) {
   return String(input || "").replace(/\s+/g, " ").trim();
 }
@@ -289,6 +379,24 @@ function buildSectionLanguage(section, source, isoDate) {
   };
 }
 
+function pickBodyStrategy(section, source, isoDate) {
+  const strategies = BODY_STRATEGIES[section] || [];
+  if (strategies.length === 0) {
+    return {
+      steps: [
+        "1. Identify the cost driver and baseline it.",
+        "2. Define one concrete optimization action.",
+        "3. Measure impact and iterate.",
+      ],
+      example: () => "",
+    };
+  }
+  const seed = `${isoDate}:${section}:${source.focus}:bodyStrategy`;
+  const index =
+    Number.parseInt(sha1(seed).slice(0, 8), 16) % strategies.length;
+  return strategies[index];
+}
+
 function tokenize(input) {
   const text = normalizeText(input);
   if (!text) return [];
@@ -332,13 +440,23 @@ function buildTemplateTip(section, source, isoDate) {
     focus: source ? cleanSourceTitle(base.title) : fallbackFocus,
   };
   const language = buildSectionLanguage(section, safeSource, isoDate);
+  const bodyStrategy = pickBodyStrategy(section, safeSource, isoDate);
   const body = template.buildBody(safeSource, language);
+  const dynamicBody = body
+    .replace(
+      /## How to Act[\s\S]*?## Example/m,
+      `## How to Act\n${bodyStrategy.steps.join("\n")}\n\n## Example`,
+    )
+    .replace(
+      /## Example[\s\S]*$/m,
+      `## Example\n${bodyStrategy.example(safeSource.focus, safeSource)}`,
+    );
   return {
     section,
     templatePrompt: template.prompt,
     title: template.buildTitle(safeSource, language),
     description: template.buildSummary(safeSource, language),
-    body,
+    body: dynamicBody,
     sourceTitle: safeSource.title,
     sourceUrl: safeSource.url,
     pubDate: isoDate,

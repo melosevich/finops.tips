@@ -119,3 +119,48 @@ test("fallback-generated titles use concrete focus terms", () => {
     assert.ok(!/finops foundation/i.test(tip.description), tip.description);
   }
 });
+
+test("section bodies vary strategy across days", () => {
+  const baseSources = [
+    {
+      title: "API retry volume",
+      url: "https://example.com/ops",
+      slug: "ops-source",
+      pubDate: "2026-03-10",
+      tags: ["operations"],
+      body: "operations source",
+    },
+    {
+      title: "Savings plan utilization",
+      url: "https://example.com/services",
+      slug: "services-source",
+      pubDate: "2026-03-10",
+      tags: ["services"],
+      body: "services source",
+    },
+    {
+      title: "Waste-rate trend",
+      url: "https://example.com/metrics",
+      slug: "metrics-source",
+      pubDate: "2026-03-10",
+      tags: ["metrics"],
+      body: "metrics source",
+    },
+  ];
+
+  const signatures = new Set();
+  for (const date of ["2026-03-16", "2026-03-17", "2026-03-18", "2026-03-19"]) {
+    const { valid } = generateSectionTips({
+      now: new Date(`${date}T00:00:00Z`),
+      sources: baseSources,
+      history: [],
+    });
+    const operationsTip = valid.find((tip) => tip.section === "operations");
+    assert.ok(operationsTip);
+    const howToBlock = operationsTip.body.match(/## How to Act\n([\s\S]*?)\n\n## Example/);
+    assert.ok(howToBlock);
+    signatures.add(howToBlock[1].trim());
+  }
+
+  assert.ok(signatures.size > 1);
+});

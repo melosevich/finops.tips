@@ -19,9 +19,9 @@ cross-region data transfer spikes is an API-level spend driver. It can be modele
 Small per-request charges compound quickly at scale when traffic is noisy. A single noisy integration can multiply request, transfer, and retry costs, then cascade into Lambda/DB invocations.
 
 ## How to Act
-1. Query 14 days of CUR and API logs, grouped by operation, caller, and status code; compute p50/p95 requests per minute.
-2. Build a cost-per-1k-requests baseline for each workload and flag callers with >20% week-over-week drift not explained by traffic.
-3. For top offenders, enforce one control: response caching, retry budget (max attempts), or request batching, then verify 48-hour impact.
+1. Build a caller-to-endpoint heatmap for the past 10 business days and isolate the top three cost-contributing request paths.
+2. For each path, estimate avoidable spend by simulating lower retry rates, stronger cache eligibility, or fewer redundant calls.
+3. Ship one runbook change per path and track whether request-related cost drops at least 10% by the next weekly review.
 
 ## Example
-If cross-region data transfer spikes from one service rises from 42M to 56M calls/week (+33%) while business KPIs stay flat, cap retries to 2, add a 300s cache TTL for idempotent reads, and target a 15-25% request-cost reduction in the next billing window. Source: [FinOps Foundation operations playbook](https://www.finops.org/framework/capabilities/workload-optimization/).
+If cross-region data transfer spikes spend concentrates in three integration flows, reduce retries on non-critical errors, cache repeat reads for five minutes, and suppress duplicate polling loops to cut request spend within one billing cycle. Source: [FinOps Foundation operations playbook](https://www.finops.org/framework/capabilities/workload-optimization/).

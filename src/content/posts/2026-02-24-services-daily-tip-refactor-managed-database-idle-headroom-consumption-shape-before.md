@@ -19,9 +19,9 @@ managed database idle headroom spend is governed by three levers: utilization pr
 Uncoordinated pricing and architecture decisions increase waste risk. Durable FinOps gains come from combining engineering changes with the right commercial commitment.
 
 ## How to Act
-1. Rank the top SKUs/usage types for this service and quantify each as % of monthly service spend.
-2. Segment workload into steady baseline vs burst usage; map baseline to RI/Savings Plan coverage target and leave burst on on-demand.
-3. Execute one engineering optimization with measured ROI (for example, reduce runtime or over-provisioning) and track realized savings against forecast.
+1. Establish a monthly service spend budget split by environment (prod/stage/dev) and owner.
+2. Flag the highest cost-per-throughput workload and run a design review focused on data transfer, storage tiering, and compute mix.
+3. Track corrective actions as explicit budget deltas and close only when actual billed savings are observed.
 
 ## Example
-If managed database idle headroom is 30% above plan and 70% of usage is stable, target 60-70% commitment coverage for the stable slice and reduce peak-unit consumption by 10-15% via architecture tuning; validate savings in CUR within 7 days. Source: [FinOps Foundation pricing and rate optimization](https://www.finops.org/framework/capabilities/rate-optimization/).
+If managed database idle headroom in non-production exceeds its budget envelope, apply schedule-based shutdown, lower retention/tiering defaults, and require owner approval for exceptional spend bursts. Source: [FinOps Foundation pricing and rate optimization](https://www.finops.org/framework/capabilities/rate-optimization/).

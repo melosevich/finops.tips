@@ -19,9 +19,9 @@ unit cost per transaction is a leading FinOps KPI that should be tracked by work
 Weak metric governance delays remediation and increases noise. Thresholds plus ownership reduce both false positives and delayed remediation.
 
 ## How to Act
-1. Define target, warning, and critical bands (for example using a 4-week rolling baseline plus variance tolerance).
-2. Slice the metric by owner dimension (team, product, environment) and attach one accountable engineer per slice.
-3. Trigger an incident-style remediation when critical threshold breaches persist >7 days, with expected savings and due date.
+1. Pair each KPI with a business denominator (users, transactions, or workload units) so trend moves are interpretable.
+2. Publish weekly scorecards by team with explicit owner notes for any warning/critical movement.
+3. Enforce a remediation gate: no metric can remain critical for two consecutive reporting cycles without CTO/FinOps escalation.
 
 ## Example
-If unit cost per transaction rises from 8% to 13% for two consecutive weeks in one product line, open a remediation ticket with a 14-day SLA, require a quantified rollback/optimization plan, and track whether waste returns below 9% by next review. Source: [FinOps Foundation KPI guidance](https://www.finops.org/framework/capabilities/measuring-unit-cost/).
+If unit cost per transaction worsens while traffic is flat, require each owner to document one corrective action and expected impact, then verify improvement in the next scorecard cycle. Source: [FinOps Foundation KPI guidance](https://www.finops.org/framework/capabilities/measuring-unit-cost/).

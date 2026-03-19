@@ -19,9 +19,9 @@ unit cost per transaction is a leading FinOps KPI that should be tracked by work
 Without threshold ownership, teams discover cost drift too late. Thresholds plus ownership reduce both false positives and delayed remediation.
 
 ## How to Act
-1. Define target, warning, and critical bands (for example using a 4-week rolling baseline plus variance tolerance).
-2. Slice the metric by owner dimension (team, product, environment) and attach one accountable engineer per slice.
-3. Trigger an incident-style remediation when critical threshold breaches persist >7 days, with expected savings and due date.
+1. Model expected KPI variance bands using seasonality (weekday/weekend or release cadence) rather than static thresholds.
+2. Route anomalies to the directly responsible team channel with a prefilled runbook and target response time.
+3. Audit false-positive and missed-alert rates monthly, then tune thresholds to improve signal quality.
 
 ## Example
-If unit cost per transaction rises from 8% to 13% for two consecutive weeks in one product line, open a remediation ticket with a 14-day SLA, require a quantified rollback/optimization plan, and track whether waste returns below 9% by next review. Source: [FinOps Foundation KPI guidance](https://www.finops.org/framework/capabilities/measuring-unit-cost/).
+If unit cost per transaction crosses critical bounds after a release train, correlate with deployment metadata, isolate regressions by service, and revert or optimize until the metric re-enters the expected band. Source: [FinOps Foundation KPI guidance](https://www.finops.org/framework/capabilities/measuring-unit-cost/).
