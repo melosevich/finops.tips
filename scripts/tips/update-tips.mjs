@@ -115,6 +115,19 @@ function removeLegacyEventDailyTips() {
   return files;
 }
 
+function removeLegacyStaticSectionTips() {
+  const files = fs
+    .readdirSync(POSTS_DIR)
+    .filter((name) => name.endsWith(".md"))
+    .filter((name) => /^(10[1-9]|20[1-9]|30[1-9])-[a-z0-9-]+\.md$/i.test(name));
+
+  for (const file of files) {
+    fs.unlinkSync(path.join(POSTS_DIR, file));
+  }
+
+  return files;
+}
+
 function withinDays(date, now, days) {
   const delta = now.getTime() - date.getTime();
   return delta >= 0 && delta <= days * MS_PER_DAY;

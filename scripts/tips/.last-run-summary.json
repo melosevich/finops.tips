@@ -1,37 +1,473 @@
 {
-  "generatedAt": "2026-03-16T09:06:27.266Z",
-  "sectionsExpected": 4,
-  "sectionsGenerated": 4,
-  "generatedCount": 4,
+  "generatedAt": "2026-03-19T14:00:20.931Z",
+  "backfillDays": 30,
+  "dateFrom": "2026-02-17",
+  "dateTo": "2026-03-18",
+  "sectionsExpected": 90,
+  "sectionsGenerated": 90,
+  "generatedCount": 90,
   "rejectedCount": 0,
   "duplicateCount": 0,
+  "removedLegacyEventTips": 0,
+  "removedLegacyStaticTips": 0,
+  "removedSupersededTips": 0,
   "rejectedReasons": {},
   "duplicateReasons": {},
   "writes": {
-    "created": 4,
+    "created": 90,
     "updated": 0,
     "unchanged": 0
   },
   "files": [
     {
-      "fileName": "2026-03-16-operations-daily-tip-runbook-focus-operation-getobject-s3.md",
+      "fileName": "2026-02-17-operations-daily-tip-control-finops-foundation-operations-playbook-patterns-to-reduce.md",
       "state": "created",
       "section": "operations"
     },
     {
-      "fileName": "2026-03-16-services-daily-tip-service-optimization-service-aws-lambda.md",
+      "fileName": "2026-02-17-services-daily-tip-tune-finops-foundation-pricing-and-rate-optimization-usage-befor.md",
       "state": "created",
       "section": "services"
     },
     {
-      "fileName": "2026-03-16-metrics-daily-tip-metric-to-watch-metric-waste-rate.md",
+      "fileName": "2026-02-17-metrics-daily-tip-track-finops-foundation-kpi-guidance-to-catch-cloud-waste-early-.md",
       "state": "created",
       "section": "metrics"
     },
     {
-      "fileName": "2026-03-16-events-daily-tip-event-prep-aws-summit-warsaw-2026.md",
+      "fileName": "2026-02-18-operations-daily-tip-understand-finops-foundation-operations-playbook-patterns-to-red.md",
       "state": "created",
-      "section": "events"
+      "section": "operations"
+    },
+    {
+      "fileName": "2026-02-18-services-daily-tip-optimize-finops-foundation-pricing-and-rate-optimization-usage-b.md",
+      "state": "created",
+      "section": "services"
+    },
+    {
+      "fileName": "2026-02-18-metrics-daily-tip-benchmark-finops-foundation-kpi-guidance-to-catch-cloud-waste-ea.md",
+      "state": "created",
+      "section": "metrics"
+    },
+    {
+      "fileName": "2026-02-19-operations-daily-tip-analyze-finops-foundation-operations-playbook-patterns-to-reduce.md",
+      "state": "created",
+      "section": "operations"
+    },
+    {
+      "fileName": "2026-02-19-services-daily-tip-rightsize-finops-foundation-pricing-and-rate-optimization-usage-.md",
+      "state": "created",
+      "section": "services"
+    },
+    {
+      "fileName": "2026-02-19-metrics-daily-tip-benchmark-finops-foundation-kpi-guidance-to-catch-cloud-waste-ea.md",
+      "state": "created",
+      "section": "metrics"
+    },
+    {
+      "fileName": "2026-02-20-operations-daily-tip-control-finops-foundation-operations-playbook-patterns-to-reduce.md",
+      "state": "created",
+      "section": "operations"
+    },
+    {
+      "fileName": "2026-02-20-services-daily-tip-rightsize-finops-foundation-pricing-and-rate-optimization-usage-.md",
+      "state": "created",
+      "section": "services"
+    },
+    {
+      "fileName": "2026-02-20-metrics-daily-tip-measure-finops-foundation-kpi-guidance-to-catch-cloud-waste-earl.md",
+      "state": "created",
+      "section": "metrics"
+    },
+    {
+      "fileName": "2026-02-21-operations-daily-tip-streamline-finops-foundation-operations-playbook-patterns-to-red.md",
+      "state": "created",
+      "section": "operations"
+    },
+    {
+      "fileName": "2026-02-21-services-daily-tip-tune-finops-foundation-pricing-and-rate-optimization-usage-befor.md",
+      "state": "created",
+      "section": "services"
+    },
+    {
+      "fileName": "2026-02-21-metrics-daily-tip-track-finops-foundation-kpi-guidance-to-catch-cloud-waste-early-.md",
+      "state": "created",
+      "section": "metrics"
+    },
+    {
+      "fileName": "2026-02-22-operations-daily-tip-control-finops-foundation-operations-playbook-patterns-to-reduce.md",
+      "state": "created",
+      "section": "operations"
+    },
+    {
+      "fileName": "2026-02-22-services-daily-tip-refactor-finops-foundation-pricing-and-rate-optimization-usage-b.md",
+      "state": "created",
+      "section": "services"
+    },
+    {
+      "fileName": "2026-02-22-metrics-daily-tip-track-finops-foundation-kpi-guidance-to-catch-cloud-waste-early-.md",
+      "state": "created",
+      "section": "metrics"
+    },
+    {
+      "fileName": "2026-02-23-operations-daily-tip-understand-finops-foundation-operations-playbook-patterns-to-red.md",
+      "state": "created",
+      "section": "operations"
+    },
+    {
+      "fileName": "2026-02-23-services-daily-tip-refactor-finops-foundation-pricing-and-rate-optimization-usage-b.md",
+      "state": "created",
+      "section": "services"
+    },
+    {
+      "fileName": "2026-02-23-metrics-daily-tip-watch-finops-foundation-kpi-guidance-to-catch-cloud-waste-early-.md",
+      "state": "created",
+      "section": "metrics"
+    },
+    {
+      "fileName": "2026-02-24-operations-daily-tip-control-finops-foundation-operations-playbook-patterns-to-reduce.md",
+      "state": "created",
+      "section": "operations"
+    },
+    {
+      "fileName": "2026-02-24-services-daily-tip-rebalance-finops-foundation-pricing-and-rate-optimization-usage-.md",
+      "state": "created",
+      "section": "services"
+    },
+    {
+      "fileName": "2026-02-24-metrics-daily-tip-track-finops-foundation-kpi-guidance-to-catch-cloud-waste-early-.md",
+      "state": "created",
+      "section": "metrics"
+    },
+    {
+      "fileName": "2026-02-25-operations-daily-tip-streamline-finops-foundation-operations-playbook-patterns-to-red.md",
+      "state": "created",
+      "section": "operations"
+    },
+    {
+      "fileName": "2026-02-25-services-daily-tip-optimize-finops-foundation-pricing-and-rate-optimization-usage-b.md",
+      "state": "created",
+      "section": "services"
+    },
+    {
+      "fileName": "2026-02-25-metrics-daily-tip-watch-finops-foundation-kpi-guidance-to-catch-cloud-waste-early-.md",
+      "state": "created",
+      "section": "metrics"
+    },
+    {
+      "fileName": "2026-02-26-operations-daily-tip-control-finops-foundation-operations-playbook-patterns-to-reduce.md",
+      "state": "created",
+      "section": "operations"
+    },
+    {
+      "fileName": "2026-02-26-services-daily-tip-rebalance-finops-foundation-pricing-and-rate-optimization-usage-.md",
+      "state": "created",
+      "section": "services"
+    },
+    {
+      "fileName": "2026-02-26-metrics-daily-tip-benchmark-finops-foundation-kpi-guidance-to-catch-cloud-waste-ea.md",
+      "state": "created",
+      "section": "metrics"
+    },
+    {
+      "fileName": "2026-02-27-operations-daily-tip-diagnose-finops-foundation-operations-playbook-patterns-to-reduc.md",
+      "state": "created",
+      "section": "operations"
+    },
+    {
+      "fileName": "2026-02-27-services-daily-tip-optimize-finops-foundation-pricing-and-rate-optimization-usage-b.md",
+      "state": "created",
+      "section": "services"
+    },
+    {
+      "fileName": "2026-02-27-metrics-daily-tip-track-finops-foundation-kpi-guidance-to-catch-cloud-waste-early-.md",
+      "state": "created",
+      "section": "metrics"
+    },
+    {
+      "fileName": "2026-02-28-operations-daily-tip-control-finops-foundation-operations-playbook-patterns-to-reduce.md",
+      "state": "created",
+      "section": "operations"
+    },
+    {
+      "fileName": "2026-02-28-services-daily-tip-tune-finops-foundation-pricing-and-rate-optimization-usage-befor.md",
+      "state": "created",
+      "section": "services"
+    },
+    {
+      "fileName": "2026-02-28-metrics-daily-tip-benchmark-finops-foundation-kpi-guidance-to-catch-cloud-waste-ea.md",
+      "state": "created",
+      "section": "metrics"
+    },
+    {
+      "fileName": "2026-03-01-operations-daily-tip-analyze-finops-foundation-operations-playbook-patterns-to-reduce.md",
+      "state": "created",
+      "section": "operations"
+    },
+    {
+      "fileName": "2026-03-01-services-daily-tip-optimize-finops-foundation-pricing-and-rate-optimization-usage-b.md",
+      "state": "created",
+      "section": "services"
+    },
+    {
+      "fileName": "2026-03-01-metrics-daily-tip-track-finops-foundation-kpi-guidance-to-catch-cloud-waste-early-.md",
+      "state": "created",
+      "section": "metrics"
+    },
+    {
+      "fileName": "2026-03-02-operations-daily-tip-understand-finops-foundation-operations-playbook-patterns-to-red.md",
+      "state": "created",
+      "section": "operations"
+    },
+    {
+      "fileName": "2026-03-02-services-daily-tip-optimize-finops-foundation-pricing-and-rate-optimization-usage-b.md",
+      "state": "created",
+      "section": "services"
+    },
+    {
+      "fileName": "2026-03-02-metrics-daily-tip-track-finops-foundation-kpi-guidance-to-catch-cloud-waste-early-.md",
+      "state": "created",
+      "section": "metrics"
+    },
+    {
+      "fileName": "2026-03-03-operations-daily-tip-analyze-finops-foundation-operations-playbook-patterns-to-reduce.md",
+      "state": "created",
+      "section": "operations"
+    },
+    {
+      "fileName": "2026-03-03-services-daily-tip-rebalance-finops-foundation-pricing-and-rate-optimization-usage-.md",
+      "state": "created",
+      "section": "services"
+    },
+    {
+      "fileName": "2026-03-03-metrics-daily-tip-track-finops-foundation-kpi-guidance-to-catch-cloud-waste-early-.md",
+      "state": "created",
+      "section": "metrics"
+    },
+    {
+      "fileName": "2026-03-04-operations-daily-tip-analyze-finops-foundation-operations-playbook-patterns-to-reduce.md",
+      "state": "created",
+      "section": "operations"
+    },
+    {
+      "fileName": "2026-03-04-services-daily-tip-refactor-finops-foundation-pricing-and-rate-optimization-usage-b.md",
+      "state": "created",
+      "section": "services"
+    },
+    {
+      "fileName": "2026-03-04-metrics-daily-tip-watch-finops-foundation-kpi-guidance-to-catch-cloud-waste-early-.md",
+      "state": "created",
+      "section": "metrics"
+    },
+    {
+      "fileName": "2026-03-05-operations-daily-tip-diagnose-finops-foundation-operations-playbook-patterns-to-reduc.md",
+      "state": "created",
+      "section": "operations"
+    },
+    {
+      "fileName": "2026-03-05-services-daily-tip-tune-finops-foundation-pricing-and-rate-optimization-usage-befor.md",
+      "state": "created",
+      "section": "services"
+    },
+    {
+      "fileName": "2026-03-05-metrics-daily-tip-track-finops-foundation-kpi-guidance-to-catch-cloud-waste-early-.md",
+      "state": "created",
+      "section": "metrics"
+    },
+    {
+      "fileName": "2026-03-06-operations-daily-tip-understand-finops-foundation-operations-playbook-patterns-to-red.md",
+      "state": "created",
+      "section": "operations"
+    },
+    {
+      "fileName": "2026-03-06-services-daily-tip-rebalance-finops-foundation-pricing-and-rate-optimization-usage-.md",
+      "state": "created",
+      "section": "services"
+    },
+    {
+      "fileName": "2026-03-06-metrics-daily-tip-track-finops-foundation-kpi-guidance-to-catch-cloud-waste-early-.md",
+      "state": "created",
+      "section": "metrics"
+    },
+    {
+      "fileName": "2026-03-07-operations-daily-tip-diagnose-finops-foundation-operations-playbook-patterns-to-reduc.md",
+      "state": "created",
+      "section": "operations"
+    },
+    {
+      "fileName": "2026-03-07-services-daily-tip-tune-finops-foundation-pricing-and-rate-optimization-usage-befor.md",
+      "state": "created",
+      "section": "services"
+    },
+    {
+      "fileName": "2026-03-07-metrics-daily-tip-benchmark-finops-foundation-kpi-guidance-to-catch-cloud-waste-ea.md",
+      "state": "created",
+      "section": "metrics"
+    },
+    {
+      "fileName": "2026-03-08-operations-daily-tip-streamline-finops-foundation-operations-playbook-patterns-to-red.md",
+      "state": "created",
+      "section": "operations"
+    },
+    {
+      "fileName": "2026-03-08-services-daily-tip-rightsize-finops-foundation-pricing-and-rate-optimization-usage-.md",
+      "state": "created",
+      "section": "services"
+    },
+    {
+      "fileName": "2026-03-08-metrics-daily-tip-benchmark-finops-foundation-kpi-guidance-to-catch-cloud-waste-ea.md",
+      "state": "created",
+      "section": "metrics"
+    },
+    {
+      "fileName": "2026-03-09-operations-daily-tip-analyze-finops-foundation-operations-playbook-patterns-to-reduce.md",
+      "state": "created",
+      "section": "operations"
+    },
+    {
+      "fileName": "2026-03-09-services-daily-tip-optimize-finops-foundation-pricing-and-rate-optimization-usage-b.md",
+      "state": "created",
+      "section": "services"
+    },
+    {
+      "fileName": "2026-03-09-metrics-daily-tip-watch-finops-foundation-kpi-guidance-to-catch-cloud-waste-early-.md",
+      "state": "created",
+      "section": "metrics"
+    },
+    {
+      "fileName": "2026-03-10-operations-daily-tip-diagnose-finops-foundation-operations-playbook-patterns-to-reduc.md",
+      "state": "created",
+      "section": "operations"
+    },
+    {
+      "fileName": "2026-03-10-services-daily-tip-rebalance-finops-foundation-pricing-and-rate-optimization-usage-.md",
+      "state": "created",
+      "section": "services"
+    },
+    {
+      "fileName": "2026-03-10-metrics-daily-tip-watch-finops-foundation-kpi-guidance-to-catch-cloud-waste-early-.md",
+      "state": "created",
+      "section": "metrics"
+    },
+    {
+      "fileName": "2026-03-11-operations-daily-tip-analyze-finops-foundation-operations-playbook-patterns-to-reduce.md",
+      "state": "created",
+      "section": "operations"
+    },
+    {
+      "fileName": "2026-03-11-services-daily-tip-rightsize-finops-foundation-pricing-and-rate-optimization-usage-.md",
+      "state": "created",
+      "section": "services"
+    },
+    {
+      "fileName": "2026-03-11-metrics-daily-tip-monitor-finops-foundation-kpi-guidance-to-catch-cloud-waste-earl.md",
+      "state": "created",
+      "section": "metrics"
+    },
+    {
+      "fileName": "2026-03-12-operations-daily-tip-analyze-finops-foundation-operations-playbook-patterns-to-reduce.md",
+      "state": "created",
+      "section": "operations"
+    },
+    {
+      "fileName": "2026-03-12-services-daily-tip-rebalance-finops-foundation-pricing-and-rate-optimization-usage-.md",
+      "state": "created",
+      "section": "services"
+    },
+    {
+      "fileName": "2026-03-12-metrics-daily-tip-benchmark-finops-foundation-kpi-guidance-to-catch-cloud-waste-ea.md",
+      "state": "created",
+      "section": "metrics"
+    },
+    {
+      "fileName": "2026-03-13-operations-daily-tip-streamline-finops-foundation-operations-playbook-patterns-to-red.md",
+      "state": "created",
+      "section": "operations"
+    },
+    {
+      "fileName": "2026-03-13-services-daily-tip-refactor-finops-foundation-pricing-and-rate-optimization-usage-b.md",
+      "state": "created",
+      "section": "services"
+    },
+    {
+      "fileName": "2026-03-13-metrics-daily-tip-monitor-finops-foundation-kpi-guidance-to-catch-cloud-waste-earl.md",
+      "state": "created",
+      "section": "metrics"
+    },
+    {
+      "fileName": "2026-03-14-operations-daily-tip-streamline-finops-foundation-operations-playbook-patterns-to-red.md",
+      "state": "created",
+      "section": "operations"
+    },
+    {
+      "fileName": "2026-03-14-services-daily-tip-rebalance-finops-foundation-pricing-and-rate-optimization-usage-.md",
+      "state": "created",
+      "section": "services"
+    },
+    {
+      "fileName": "2026-03-14-metrics-daily-tip-measure-finops-foundation-kpi-guidance-to-catch-cloud-waste-earl.md",
+      "state": "created",
+      "section": "metrics"
+    },
+    {
+      "fileName": "2026-03-15-operations-daily-tip-control-finops-foundation-operations-playbook-patterns-to-reduce.md",
+      "state": "created",
+      "section": "operations"
+    },
+    {
+      "fileName": "2026-03-15-services-daily-tip-refactor-finops-foundation-pricing-and-rate-optimization-usage-b.md",
+      "state": "created",
+      "section": "services"
+    },
+    {
+      "fileName": "2026-03-15-metrics-daily-tip-watch-finops-foundation-kpi-guidance-to-catch-cloud-waste-early-.md",
+      "state": "created",
+      "section": "metrics"
+    },
+    {
+      "fileName": "2026-03-16-operations-daily-tip-analyze-finops-foundation-operations-playbook-patterns-to-reduce.md",
+      "state": "created",
+      "section": "operations"
+    },
+    {
+      "fileName": "2026-03-16-services-daily-tip-rightsize-finops-foundation-pricing-and-rate-optimization-usage-.md",
+      "state": "created",
+      "section": "services"
+    },
+    {
+      "fileName": "2026-03-16-metrics-daily-tip-benchmark-finops-foundation-kpi-guidance-to-catch-cloud-waste-ea.md",
+      "state": "created",
+      "section": "metrics"
+    },
+    {
+      "fileName": "2026-03-17-operations-daily-tip-analyze-finops-foundation-operations-playbook-patterns-to-reduce.md",
+      "state": "created",
+      "section": "operations"
+    },
+    {
+      "fileName": "2026-03-17-services-daily-tip-rightsize-finops-foundation-pricing-and-rate-optimization-usage-.md",
+      "state": "created",
+      "section": "services"
+    },
+    {
+      "fileName": "2026-03-17-metrics-daily-tip-monitor-finops-foundation-kpi-guidance-to-catch-cloud-waste-earl.md",
+      "state": "created",
+      "section": "metrics"
+    },
+    {
+      "fileName": "2026-03-18-operations-daily-tip-understand-finops-foundation-operations-playbook-patterns-to-red.md",
+      "state": "created",
+      "section": "operations"
+    },
+    {
+      "fileName": "2026-03-18-services-daily-tip-refactor-finops-foundation-pricing-and-rate-optimization-usage-b.md",
+      "state": "created",
+      "section": "services"
+    },
+    {
+      "fileName": "2026-03-18-metrics-daily-tip-benchmark-finops-foundation-kpi-guidance-to-catch-cloud-waste-ea.md",
+      "state": "created",
+      "section": "metrics"
     }
   ]
 }
