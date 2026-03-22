@@ -1,7 +1,7 @@
 ---
 pubDate: 2026-03-25
 team: "gonzalo-melosevich"
-title: "Microsoft Azure Technical Forum -  NextGeneration Cloud Infrastructure: Sovereignty,..."
+title: "Microsoft Azure Technical Forum - NextGeneration Cloud Infrastructure: Sovereignty,..."
 description: "Microsoft Azure Technical Forum - NextGeneration Cloud Infrastructure: Sovereignty, Resilience, and Trusted Execution"
 image:
   url: "/src/images/events/official/microsoft.png"
