@@ -1,0 +1,16 @@
+{
+  "generatedAt": "2026-03-27T19:42:39.887Z",
+  "candidateCount": 30,
+  "validCount": 27,
+  "rejectedCount": 3,
+  "duplicateCount": 0,
+  "rejectedReasons": {
+    "NON_EUROPE_LOCATION": 3
+  },
+  "duplicateReasons": {},
+  "writes": {
+    "created": 7,
+    "updated": 8,
+    "unchanged": 12
+  }
+}
