@@ -2,7 +2,7 @@
 pubDate: 2026-06-29
 team: "gonzalo-melosevich"
 title: "Siemens Realize Live EMEA"
-description: "Join expert-led session featuring real-world insights from customers and industry leaders. Learn how the integrated digital thread, industrial AI-powered digital twin, and cloud-native agility a"
+description: "Learn how the integrated digital thread, industrial AI-powered digital twin, and cloud-native agility are transforming the future of industry."
 image:
   url: "/src/images/events/official/microsoft.png"
   alt: "Microsoft Events"

@@ -1,0 +1,36 @@
+{
+  "generatedAt": "2026-04-02T18:58:53.949Z",
+  "runDateCopenhagen": "2026-04-02",
+  "retryPolicy": {
+    "attempts": 3,
+    "backoffMs": 15000
+  },
+  "overallSuccess": true,
+  "events": {
+    "success": true,
+    "attemptsUsed": 1,
+    "exitCode": 0,
+    "metrics": {
+      "candidateCount": 39,
+      "validCount": 36,
+      "rejectedCount": 3,
+      "duplicateCount": 0,
+      "writesCreated": 13,
+      "writesUpdated": 12,
+      "writesUnchanged": 11
+    }
+  },
+  "tips": {
+    "success": true,
+    "attemptsUsed": 1,
+    "exitCode": 0,
+    "metrics": {
+      "generatedCount": 3,
+      "rejectedCount": 0,
+      "duplicateCount": 0,
+      "writesCreated": 3,
+      "writesUpdated": 0,
+      "writesUnchanged": 0
+    }
+  }
+}\n
