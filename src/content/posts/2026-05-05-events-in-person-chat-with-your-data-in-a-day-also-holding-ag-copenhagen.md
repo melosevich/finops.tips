@@ -1,7 +1,7 @@
 ---
-pubDate: 2026-04-14
+pubDate: 2026-05-05
 team: "gonzalo-melosevich"
-title: "In Person: Chat with Your Data in a Day - InSpark - Amstelveen"
+title: "In Person: Chat with Your Data in a Day - ALSO Holding AG - Copenhagen"
 description: "Tailored for Power BI Data Analysts, this hands-on workshop teaches you to make models chat-ready, unlock insights with natural language, and optimize data for Copilot."
 image:
   url: "/src/images/events/official/microsoft.png"
@@ -11,10 +11,10 @@ tags:
   - microsoft
 ---
 
-**When:** 2026-04-14
+**When:** 2026-05-05
 
-**Where:** Amstelveen, Netherlands
+**Where:** Copenhagen, Denmark
 
 **Source:** Microsoft Events
 
-**Link:** https://msevents.microsoft.com/event?id=2194224107
+**Link:** https://msevents.microsoft.com/event?id=207158525
